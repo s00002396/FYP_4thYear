@@ -1,0 +1,148 @@
+﻿@model ICollection<RegistrationMVCCore.Model.MyViewModel>
+
+
+    @if (@ViewBag.UserName == "DomBrennan")
+    {
+        <h3><em>Username</em>: @ViewBag.UserName <Small>(admin)</Small> </h3>
+    }
+    else
+    {
+        <h2>Username: @ViewBag.UserName </h2>
+    }
+
+<section style="width:900px">
+<section style="height:50px;width:600px;float:right; ">
+<ul class="nav nav-tabs" style="background-color:white">
+            <li class="active test"><a data-toggle="tab" href="#home">Todays Tasks</a></li>
+            <li class="test"><a data-toggle="tab" href="#menu1">All Tasks</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>Todays Tasks</h3>
+                <div class="box" style="width:600px;">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading" style="font:bold"><strong>Patient Name&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
+                        <div class="panel-body" style="height:150px">
+                            <div class="right-inner-addon" style="width:170px;">
+                               @if (Model.Any())
+                               {                                  
+                                <table class="table table-condensed table-hover">                                    
+                                @foreach (var item in Model)
+                                {
+                                    @if (@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy") == @ViewBag.TodaysDate.ToString("dd/MM/yyyy"))
+                                    {
+                                    <tr>
+                                        <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        
+                                        @if (@item.vmTaskTable.Completed.ToString() == "False")
+                                        {
+                                            <td>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        }
+                                        else
+                                        {
+                                         <td>Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        }
+                                        <td>@Html.ActionLink("Details", "Details", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
+                                    </tr>
+                                    }
+                                    @*else
+                                    {
+                                        <p>No tasks today123</p>                                    
+                                    }*@
+                                }@*end foreach*@
+                                </table>
+                               }@*end if(any)*@
+                               else
+                               {
+                                <p>No records found. </p>
+                               }
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>All Tasks</h3>
+                <div class="box" style="width:600px; ">
+                  <div class="panel panel-default ">
+                      <div class="panel-heading" style="font:bold"><strong>Patient Name&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
+                      <div class="panel-body" style="height:478px">
+                        <div class="right-inner-addon" style="width:170px;">
+                          @if (Model.Any())
+                          {
+                           <table class="table table-condensed table-striped">
+                                        
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                             <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>                                                                                              <td>@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                               <td>@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                               
+                                    @if (@item.vmTaskTable.Completed.ToString() == "False")
+                                    {
+                                        <td>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                    }
+                                <td>@Html.ActionLink("Details", "Details", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
+                                </tr>
+                            }                                                            
+                            </table>
+                          }
+                          else
+                          {
+                            <p>There are no registered users</p>
+                          }
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside>
+        <div class="box" style="width:300px; ">
+            <div class="panel panel-default ">
+                <div class="panel-heading" style="background-color:#605CA8; color:#F7FFFF">Client Search</div>
+                <div class="panel-body" style="height:75px">
+                    <div class="right-inner-addon" style="width:240px;">
+                        @*<p>*@
+                            @using (@Html.BeginForm("Welcome", "Home", FormMethod.Get))
+                            {
+                                @Html.TextBox("search", "", new { placeholder = "Search by PPS No.", style = "border-radius:5px; float:left; width:170px; margin-right:3px", @class = "form-control"})<input type="submit" style="border-radius:5px; height:32px" value="search" />
+                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box" style="width:300px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:#605CA8; color:#F7FFFF">Alerts & Pending Tasks</div>
+                <div class="panel-body" style="height:150px">
+                @foreach (var item in Model)
+                {
+                    <a href="#"><i class="glyphicon glyphicon-flag flag-1" style="color:red"><span>&nbsp;</span></i>@item.vmPatientTable.Name - @item.vmTaskTable.TaskType</a><br />                   
+                }                    
+                </div>
+            </div>
+        </div>
+        <div class="box" style="width:300px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">Recently Viewed</div>
+                <div class="panel-body" style="height:150px">
+                    @foreach (var item in Model)
+                    {
+                        <a href="#"><i class="glyphicon glyphicon-time watch-1"><span>&nbsp;</span></i>@item.vmPatientTable.Name - @item.vmTaskTable.TaskType</a><br />
+                    } 
+                    @*<a href="#"><i class="glyphicon glyphicon-time watch-1"><span>&nbsp;</span></i>John Smith - Follow-up call</a><br />
+                    <a href="#"><i class="glyphicon glyphicon-time watch-1"><span>&nbsp;</span></i>John Smith - Follow-up call</a>*@
+                </div>
+            </div>
+        </div>
+    </aside>   
+</section>
