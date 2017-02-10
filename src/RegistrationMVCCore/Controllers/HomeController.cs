@@ -20,6 +20,80 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion
 
+        #region Welcome
+        public ActionResult Welcome(string search, int userID)
+        {
+            var searchID = Convert.ToInt32(search);
+            ViewBag.UserName = HttpContext.Session.GetString("Username");
+
+
+            if (search != null)
+            { 
+                var patientDetails = (from pA in _context.patientAccount
+                                        join g in _context.guardians on pA.GuardianID equals g.GuardianID
+                                        join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                                        //join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
+                                        //where otTask.OccID.Equals(occID)
+                                        where pA.PPS_No.Equals(searchID)
+                                        //where t.DueDate.Date == today
+                                        select new PatientDetailsViewModel
+                                        {
+                                            vmPatientTable = pA,
+                                            vmGuardian = g,
+                                            vmSchools = s
+                                        }).ToList();
+                
+                return View("Details", patientDetails);
+            }
+            else if (HttpContext.Session.GetString("UserID")!=null)
+            {
+                //call up all records wit todays date..                
+                DateTime today = DateTime.Today;
+                ViewBag.TodaysDate = today;
+                var occID = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+
+                var myNewTasks = (from t in _context.tasks
+                                    join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
+                                    join uA in _context.userAccount on otTask.OccID equals uA.UserID
+                                    join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
+                                    //where otTask.OccID.Equals(occID)
+                                    where otTask.OccID.Equals(occID)
+                                    //where t.DueDate.Date == today
+                                    select new MyViewModel
+                                    {
+                                        vmTaskTable = t,
+                                        vmUserAcc = uA,
+                                        vmTPOT = otTask,
+                                        vmPatientTable = pA
+                                    }).ToList();
+
+                //var test = myNewTasks;                
+                
+                return View(myNewTasks);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }            
+        }
+        #endregion
+
+        #region Register
+        [HttpPost]
+        public ActionResult Register(UserAccount user)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.userAccount.Add(user);
+                _context.SaveChanges();
+
+                ModelState.Clear();
+                ViewBag.Message = user.FirstName + " " + user.LastName + " is successfuly registered. ";
+            }
+            return View();
+        }
+        #endregion      
+
         #region Index
         public ActionResult Index()
         {
@@ -67,79 +141,27 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion        
 
-        #region Register
-        [HttpPost]
-        public ActionResult Register(UserAccount user)
+        public IActionResult CreateStudentRecord()
         {
-            if (ModelState.IsValid)
+            Patient_Table newStudent = new Patient_Table()
             {
-                _context.userAccount.Add(user);
-                _context.SaveChanges();
+                //PPS_No = 305,
+                Name = "Fred Johnson",
+                AddressLineOne = "Millrun",
+                City = "Sligo",
+                County = "Sligo",
+                SchoolID = 801,
+                GuardianID = 601,
+                OccID = 401
 
-                ModelState.Clear();
-                ViewBag.Message = user.FirstName + " " + user.LastName + " is successfuly registered. ";
-            }
-            return View();
+            };
+            _context.patientAccount.Add(newStudent);
+
+            _context.SaveChanges();
+            return RedirectToAction("Welcome");
         }
-        #endregion      
 
-        #region Welcome
-        public ActionResult Welcome(string search, int userID)
-        {
-            var searchID = Convert.ToInt32(search);
-            ViewBag.UserName = HttpContext.Session.GetString("Username");
-
-
-            if (search != null)
-            { 
-                var patientDetails = (from pA in _context.patientAccount
-                                      join g in _context.guardians on pA.GuardianID equals g.GuardianID
-                                      join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
-                                      //join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                                      //where otTask.OccID.Equals(occID)
-                                      where pA.PPS_No.Equals(searchID)
-                                      //where t.DueDate.Date == today
-                                      select new PatientDetailsViewModel
-                                      {
-                                          vmPatientTable = pA,
-                                          vmGuardian = g,
-                                          vmSchools = s
-                                      }).ToList();
-                
-                return View("Details", patientDetails);
-            }
-            else if (HttpContext.Session.GetString("UserID")!=null)
-            {
-                //call up all records wit todays date..                
-                DateTime today = DateTime.Today;
-                ViewBag.TodaysDate = today;
-                var occID = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
-
-                var myNewTasks = (from t in _context.tasks
-                                  join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
-                                  join uA in _context.userAccount on otTask.OccID equals uA.UserID
-                                  join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                                  //where otTask.OccID.Equals(occID)
-                                  where otTask.OccID.Equals(occID)
-                                  //where t.DueDate.Date == today
-                                  select new MyViewModel
-                                  {
-                                      vmTaskTable = t,
-                                      vmUserAcc = uA,
-                                      vmTPOT = otTask,
-                                      vmPatientTable = pA
-                                  }).ToList();
-
-                //var test = myNewTasks;                
-                
-                return View(myNewTasks);
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }            
-        }
-        #endregion
+       
 
         #region Logout
         public ActionResult Logout()
