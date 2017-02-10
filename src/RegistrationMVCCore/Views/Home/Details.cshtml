@@ -16,6 +16,8 @@
         <div class="col-md-1"style="border-right:2px solid white; ">School Name</div>         
     </div>
     <div class="row">
+    @if (Model.Any())
+{
         @foreach (var item in Model)
         {
             <div class="col-md-1">@item.vmPatientTable.Name</div>
@@ -27,6 +29,11 @@
             <div class="col-md-1">@item.vmGuardian.PhoneNo</div>
             <div class="col-md-1">@item.vmSchools.SchoolName</div>   
         } 
+    }
+    else
+    {
+        <p>No records found.</p>
+    }
     </div>
     <div>
         <hr />

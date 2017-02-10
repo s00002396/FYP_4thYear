@@ -37,8 +37,8 @@
                     @if (Context.Session.GetString("UserID") != null)
                     {
                         <li><a style="color:white" asp-area="" asp-controller="Home" asp-action="Welcome">Home</a></li>
-                        <li><a style="color:white" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                         <li><a style="color:white; margin-right:500px" asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                        @*<li><a style="color:white; margin-right:500px" asp-area="" asp-controller="Home" asp-action="Register">Add Patient</a></li>*@
                         <li><a style="color:white" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
                     }
                     else

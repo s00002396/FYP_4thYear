@@ -8,15 +8,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace RegistrationMVCCore.Controllers
 {
-    //private OurDbContxt db = new OurDbContxt();
+    
     public class HomeController : Controller
     {
         private OurDbContext _context;
 
+        #region HomeController
         public HomeController(OurDbContext context)
         {
             _context = context;
         }
+        #endregion
 
         #region Index
         public ActionResult Index()
@@ -42,23 +44,15 @@ namespace RegistrationMVCCore.Controllers
             }
             return View();
         }
-        #endregion
-
-        //public IActionResult Index()
-        //{
-        //    return View(_context.userAccount.ToList());
-        //}
+        #endregion        
 
         #region Details
         public ActionResult Details(int? id)
         {
             var patientDetails = (from pA in _context.patientAccount
                                   join g in _context.guardians on pA.GuardianID equals g.GuardianID
-                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID 
-                                  //join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                                  //where otTask.OccID.Equals(occID)
+                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID                                  
                                   where pA.PPS_No.Equals(id)
-                                  //where t.DueDate.Date == today
                                   select new PatientDetailsViewModel
                                   {
                                       vmPatientTable = pA,
@@ -66,35 +60,11 @@ namespace RegistrationMVCCore.Controllers
                                       vmSchools = s
                                   }).ToList();
             
-            //ViewBag.PageTitle = "Details for " + client.Name;
+            
             
             return View(patientDetails);
         }
-        #endregion
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-         
-        public ActionResult Register()
-        {
-            return View();
-        }
+        #endregion        
 
         #region Register
         [HttpPost]
@@ -110,29 +80,7 @@ namespace RegistrationMVCCore.Controllers
             }
             return View();
         }
-        #endregion
-
-        //public ActionResult Login()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Login(UserAccount user)
-        //{
-        //    var account = _context.userAccount.Where(u => u.UserName == user.UserName && u.Password == user.Password).FirstOrDefault();
-        //    if (account !=null)
-        //    {
-        //        HttpContext.Session.SetString("UserID", account.UserID.ToString());
-        //        HttpContext.Session.SetString("Username", account.UserName);
-        //        return RedirectToAction("Welcome");
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError("", "Username or password is worng");
-        //    }
-        //    return View();
-        //}
+        #endregion      
 
         #region Welcome
         public ActionResult Welcome(string search, int userID)
@@ -142,22 +90,7 @@ namespace RegistrationMVCCore.Controllers
 
 
             if (search != null)
-            {
-                //ICollection<Patient_Table> mySearch = _context.patientAccount.Where(x => x.Name.Contains(search)|| search == null).ToList();
-                //var myNewTasks = (from t in _context.tasks
-                //                  join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
-                //                  join uA in _context.userAccount on otTask.OccID equals uA.UserID
-                //                  join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                //                  where pA.PPS_No.Equals(searchID)
-
-                //                  select new MyViewModel
-                //                  {
-                //                      vmTaskTable = t,
-                //                      vmUserAcc = uA,
-                //                      vmTPOT = otTask,
-                //                      vmPatientTable = pA
-                //                  }).ToList();
-
+            { 
                 var patientDetails = (from pA in _context.patientAccount
                                       join g in _context.guardians on pA.GuardianID equals g.GuardianID
                                       join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
@@ -171,9 +104,7 @@ namespace RegistrationMVCCore.Controllers
                                           vmGuardian = g,
                                           vmSchools = s
                                       }).ToList();
-
-                //var test5 = myNewTasks;
-                //return View(myNewTasks);//redirect to search page!
+                
                 return View("Details", patientDetails);
             }
             else if (HttpContext.Session.GetString("UserID")!=null)
@@ -214,6 +145,32 @@ namespace RegistrationMVCCore.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region 
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
         }
         #endregion
     }
