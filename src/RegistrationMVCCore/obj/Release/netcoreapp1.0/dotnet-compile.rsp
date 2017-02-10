@@ -1,12 +1,12 @@
---temp-output:C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\obj\Debug\netcoreapp1.0\
---out:C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\bin\Debug\netcoreapp1.0\RegistrationMVCCore.dll
---define:DEBUG
+--temp-output:C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\obj\Release\netcoreapp1.0\
+--out:C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\bin\Release\netcoreapp1.0\RegistrationMVCCore.dll
+--define:RELEASE
 --define:TRACE
 --define:NETCOREAPP1_0
 --suppress-warning:CS1701
 --suppress-warning:CS1702
 --suppress-warning:CS1705
---optimize:False
+--optimize:True
 --emit-entry-point:True
 --output-name:RegistrationMVCCore
 --file-version:1.0.0.0
@@ -201,7 +201,7 @@
 --reference:C:\Users\Dominic\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\Dominic\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Dominic\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
---resource:"C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\obj\Debug\netcoreapp1.0\RegistrationMVCCoredotnet-compile.deps.json",RegistrationMVCCore.deps.json
+--resource:"C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\obj\Release\netcoreapp1.0\RegistrationMVCCoredotnet-compile.deps.json",RegistrationMVCCore.deps.json
 C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\Program.cs
 C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\Startup.cs
 C:\Users\Dominic\Desktop\RegistrationMVCCore\src\RegistrationMVCCore\Controllers\HomeController.cs

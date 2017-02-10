@@ -34,6 +34,10 @@ namespace RegistrationMVCCore
             services.AddDistributedMemoryCache();
             services.AddSession();
             var connection = @"Server=(localdb)\mssqllocaldb;Database=MVCLoginDB;Trusted_Connection=True;";
+
+            //var connection = @"Server=tcp:dominicbrennan.database.windows.net,1433;Initial Catalog=FYP_Project;Persist Security Info=False;User ID=dominicbrennan;Password=Fld118yi;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+
             services.AddDbContext<OurDbContext>(Options => Options.UseSqlServer(connection));
         }
 

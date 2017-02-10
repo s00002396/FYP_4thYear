@@ -8,9 +8,10 @@ using RegistrationMVCCore.Model;
 namespace RegistrationMVCCore.Migrations
 {
     [DbContext(typeof(OurDbContext))]
-    partial class OurDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170210101638_addedOpenCloseDates")]
+    partial class addedOpenCloseDates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -68,7 +69,7 @@ namespace RegistrationMVCCore.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<DateTime?>("CloseDate");
+                    b.Property<DateTime>("CloseDate");
 
                     b.Property<string>("County");
 

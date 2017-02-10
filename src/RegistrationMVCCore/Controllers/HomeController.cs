@@ -51,13 +51,14 @@ namespace RegistrationMVCCore.Controllers
         {
             var patientDetails = (from pA in _context.patientAccount
                                   join g in _context.guardians on pA.GuardianID equals g.GuardianID
-                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID                                  
+                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID join uA in _context.userAccount on pA.OccID equals uA.UserID                
                                   where pA.PPS_No.Equals(id)
                                   select new PatientDetailsViewModel
                                   {
                                       vmPatientTable = pA,
                                       vmGuardian = g,
-                                      vmSchools = s
+                                      vmSchools = s,
+                                      vmUserAcc = uA
                                   }).ToList();
             
             

@@ -5,30 +5,36 @@
     <h2>Patient Details</h2>
    
     <div class="row" style="background-color:#605CA8; color:#F7FFFF; margin-bottom:7px">
-        <div class="col-md-1" style="border-right:2px solid white; ">Student Name</div>
-        <div class="col-md-1"style="border-right:2px solid white; ">PPS Number</div>
+        <div class="col-md-1" style="border-right:2px solid white; ">Assigned To</div>
+        <div class="col-md-1" style="border-right:2px solid white; ">PPS Number</div>
+        <div class="col-md-1" style="border-right:2px solid white; ">Student Name</div>        
         <div class="col-md-1"style="border-right:2px solid white; ">Address Line1</div>
         <div class="col-md-1"style="border-right:2px solid white; "><br />&nbsp;&nbsp;&nbsp;City</div>
         <div class="col-md-1"style="border-right:2px solid white; "><br />&nbsp;&nbsp;&nbsp;County</div>
         <div class="col-md-1"style="border-right:2px solid white; ">Guardian Name</div>
         @*<div class="col-md-1"><i class="glyphicon glyphicon-phone ">Phone</i></div>*@
         <div class="col-md-1"style="border-right:2px solid white; ">Phone<i class="glyphicon glyphicon-phone-alt ">&nbsp;&nbsp;</i></div>
-        <div class="col-md-1"style="border-right:2px solid white; ">School Name</div>         
+        <div class="col-md-1"style="border-right:2px solid white; ">School Name</div>   
+        <div class="col-md-1" style="border-right:2px solid white; ">Open Date</div>  
+        <div class="col-md-1" style="border-right:2px solid white; ">Close Date</div>     
     </div>
     <div class="row">
     @if (Model.Any())
 {
         @foreach (var item in Model)
         {
-            <div class="col-md-1">@item.vmPatientTable.Name</div>
+            <div class="col-md-1">@item.vmUserAcc.FirstName</div>
             <div class="col-md-1">@item.vmPatientTable.PPS_No</div>
+            <div class="col-md-1">@item.vmPatientTable.Name</div>            
             <div class="col-md-1">@item.vmPatientTable.AddressLineOne</div>
             <div class="col-md-1">@item.vmPatientTable.City</div>
             <div class="col-md-1">@item.vmPatientTable.County</div>
             <div class="col-md-1">@item.vmGuardian.Name</div>
             <div class="col-md-1">@item.vmGuardian.PhoneNo</div>
-            <div class="col-md-1">@item.vmSchools.SchoolName</div>   
-        } 
+            <div class="col-md-1">@item.vmSchools.SchoolName</div>
+            <div class="col-md-1">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</div>
+            <div class="col-md-1">@item.vmPatientTable.CloseDate.ToString()</div>
+        }
     }
     else
     {

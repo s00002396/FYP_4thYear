@@ -39,6 +39,9 @@ namespace RegistrationMVCCore.Model
         public int SchoolID { get; set; }
         public int GuardianID { get; set; }
         public int OccID { get; set; }
+        public DateTime OpenDate { get; set; }
+        public DateTime? CloseDate { get; set; }
+
 
     }
     public class Guardian_Table
@@ -106,6 +109,7 @@ namespace RegistrationMVCCore.Model
         public SchoolList_Table vmSchools { get; set; }
         public Patient_Table vmPatientTable { get; set; }
         public Guardian_Table vmGuardian { get; set; }
+        public UserAccount vmUserAcc { get; set; }
     }
      
 }
