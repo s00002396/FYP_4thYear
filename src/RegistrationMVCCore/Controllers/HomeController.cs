@@ -88,7 +88,7 @@ namespace RegistrationMVCCore.Controllers
                 _context.SaveChanges();
 
                 ModelState.Clear();
-                ViewBag.Message = user.FirstName + " " + user.LastName + " is successfuly registered. ";
+                ViewBag.Message = user.FirstName + " " + user.LastName + " was successfuly registered. ";
             }
             return View();
         }
@@ -141,27 +141,44 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion        
 
+        #region Create
         public IActionResult CreateStudentRecord()
         {
-            Patient_Table newStudent = new Patient_Table()
-            {
-                //PPS_No = 305,
-                Name = "Fred Johnson",
-                AddressLineOne = "Millrun",
-                City = "Sligo",
-                County = "Sligo",
-                SchoolID = 801,
-                GuardianID = 601,
-                OccID = 401
-
-            };
-            _context.patientAccount.Add(newStudent);
-
-            _context.SaveChanges();
-            return RedirectToAction("Welcome");
+            return View();
         }
+        [HttpPost]
+        public IActionResult CreateStudentRecord(Patient_Table student)
+        {
+            #region hardCoded
+            //Patient_Table newStudent = new Patient_Table()
+            //{
+            //    //PPS_No = 305,
+            //    Name = "Fred Johnson",
+            //    AddressLineOne = "Millrun",
+            //    City = "Sligo",
+            //    County = "Sligo",
+            //    SchoolID = 801,
+            //    GuardianID = 601,
+            //    OccID = 401
 
-       
+            //};
+            //_context.patientAccount.Add(newStudent);
+
+            //_context.SaveChanges();
+            //return RedirectToAction("Welcome");
+            #endregion
+
+            if (ModelState.IsValid)
+            {
+                _context.patientAccount.Add(student);
+                _context.SaveChanges();
+
+                ModelState.Clear();
+                ViewBag.Message = student.Name + " " +  " was successfuly registered. ";
+            }
+            return View();
+        }
+        #endregion
 
         #region Logout
         public ActionResult Logout()

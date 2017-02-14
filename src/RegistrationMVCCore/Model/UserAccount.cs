@@ -29,9 +29,11 @@ namespace RegistrationMVCCore.Model
     }
     public class Patient_Table
     {
-        [Key]
+        [Key, Display(Name ="PPS Number")]
         public int PPS_No { get; set; }
+        [Display(Name = "Student Name")]
         public string Name { get; set; }
+        [Display(Name = "Address line 1")]
         public string AddressLineOne { get; set; }
         public string City { get; set; }
         public string County { get; set; }

@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a style="color:white; width:350px" asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">FYP</a>
+                <a style="color:white; width:250px" asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">FYP</a>
             </div>
 @*@if (!User.Identity.IsAuthenticated)
 {*@
@@ -36,9 +36,9 @@
                     
                     @if (Context.Session.GetString("UserID") != null)
                     {
-                        <li><a style="color:white" asp-area="" asp-controller="Home" asp-action="Welcome">Home</a></li>
-                        <li><a style="color:white; margin-right:500px" asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
-                        @*<li><a style="color:white; margin-right:500px" asp-area="" asp-controller="Home" asp-action="Register">Add Patient</a></li>*@
+                        <li><a style="color:white;margin-right:50px" asp-area="" asp-controller="Home" asp-action="Welcome">Home</a></li>
+                        <li><a style="color:white; margin-right:50px" asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                        <li><a style="color:white; margin-right:300px" asp-area="" asp-controller="Home" asp-action="CreateStudentRecord">Add Patient</a></li>
                         <li><a style="color:white" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
                     }
                     else
