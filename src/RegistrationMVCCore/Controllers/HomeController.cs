@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RegistrationMVCCore.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RegistrationMVCCore.Controllers
 {
@@ -144,11 +145,15 @@ namespace RegistrationMVCCore.Controllers
         #region Create
         public IActionResult CreateStudentRecord()
         {
+            List<SchoolList_Table> schoolList = _context.schoolLists.ToList();
+            ViewBag.schoolList = new SelectList(schoolList, "SchoolID", "SchoolName");
             return View();
         }
         [HttpPost]
         public IActionResult CreateStudentRecord(Patient_Table student)
         {
+            List<SchoolList_Table> schoolList = _context.schoolLists.ToList();
+            ViewBag.schoolList = new SelectList(schoolList, "SchoolID", "SchoolName");
             #region hardCoded
             //Patient_Table newStudent = new Patient_Table()
             //{

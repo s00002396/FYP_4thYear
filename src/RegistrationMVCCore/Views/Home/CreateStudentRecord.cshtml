@@ -22,13 +22,14 @@
                 }
                 <h4 style="text-align:center">Student Details.</h4>
                 <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+
                 @*<div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                        <input asp-for="PPS_No" placeholder="PPS Number" class="form-control" />
-                        <span asp-validation-for="PPS_No" class="text-danger"></span>
-                    </div>
-                </div>*@
+                        <div class="col-md-offset-2 col-md-8">
+                            <input asp-for="PPS_No" placeholder="PPS Number" class="form-control" />
+                            <span asp-validation-for="PPS_No" class="text-danger"></span>
+                        </div>
+                    </div>*@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
                         <input asp-for="Name" placeholder="Full Name" class="form-control" />
@@ -55,14 +56,26 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.SchoolID, ViewBag.schoolList as SelectList, "--School Name--", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <input asp-for="OpenDate" placeholder="Open Date" class="form-control" />
+                        <span asp-validation-for="OpenDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
                         <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Create" />
                     </div>
-                </div> 
+                </div>
             </div>
 
         }@*end Using*@
-    </div>
-</div>
+                </div>
+            </div>
 <div>
     <hr />
     @Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })
