@@ -7,6 +7,7 @@ using RegistrationMVCCore.Model;
 
 namespace RegistrationMVCCore.Migrations
 {
+
     [DbContext(typeof(OurDbContext))]
     partial class OurDbContextModelSnapshot : ModelSnapshot
     {

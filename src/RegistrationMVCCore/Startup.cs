@@ -9,9 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RegistrationMVCCore.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace RegistrationMVCCore
 {
+    
     public class Startup
     {
         public Startup(IHostingEnvironment env)

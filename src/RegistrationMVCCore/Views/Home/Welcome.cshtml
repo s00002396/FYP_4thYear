@@ -139,3 +139,33 @@
         </aside>
     </section>
 </div>
+
+@section scripts
+{
+    <script>
+        function showActors(movieId) {
+            // When Leader name clicked, invoke Controler action method to return partial view and ajax it into place
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ActorsById")',
+                data: { id: movieId },
+                success: function (data) {
+                    $('#Detail').hide();
+                    $('#EditActor').hide();
+                    $('#AddActor').hide();
+                    $('#Detail').html(data);
+                    $('#Detail').fadeIn("slow");
+                    $('#AddActor').find('input[name="actorId"]').val(""); // set campId for the Create Child form
+                    $('#AddActor').find('input[name="actorName"]').val("");
+                    $('#AddActor').fadeIn("slow");
+                },
+                error: function (data) {
+                    $('#Detail').html('<h3>Error in retrieval</h3>');
+                }
+            });
+        }
+
+
+    </script>
+
+}

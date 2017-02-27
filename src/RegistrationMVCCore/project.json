@@ -45,7 +45,7 @@
       ]
     }
   },
-
+  
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
@@ -57,20 +57,20 @@
     }
   },
   "runtimes": {
-    "win10-x64": {},
+    "win10-x64": {}
   },
 
-    "publishOptions": {
-      "include": [
-        "wwwroot",
-        "**/*.cshtml",
-        "appsettings.json",
-        "web.config"
-      ]
-    },
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "**/*.cshtml",
+      "appsettings.json",
+      "web.config"
+    ]
+  },
 
-    "scripts": {
-      "prepublish": [ "bower install", "dotnet bundle" ],
-      "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-    }
+  "scripts": {
+    "prepublish": [ "bower install", "dotnet bundle" ],
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
+}

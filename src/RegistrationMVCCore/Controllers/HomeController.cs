@@ -126,18 +126,25 @@ namespace RegistrationMVCCore.Controllers
         {
             var patientDetails = (from pA in _context.patientAccount
                                   join g in _context.guardians on pA.GuardianID equals g.GuardianID
-                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID join uA in _context.userAccount on pA.OccID equals uA.UserID                
+                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                                  join uA in _context.userAccount on pA.OccID equals uA.UserID
+                                  //join nO in _context.notes on pA.PPS_No equals nO.PPS_No
                                   where pA.PPS_No.Equals(id)
                                   select new PatientDetailsViewModel
                                   {
                                       vmPatientTable = pA,
                                       vmGuardian = g,
                                       vmSchools = s,
-                                      vmUserAcc = uA
+                                      vmUserAcc = uA//,
+                                      //vmNoteTable = nO
                                   }).ToList();
-            
-            
-            
+
+
+
+            //ViewData["noteList"] = new SelectList(_context.notes, "NoteID", "NoteTitle");
+            //SelectList list = new SelectList(_context.notes, "NoteID", "NoteTitle");
+            ViewBag.noteList = patientDetails;
+            var x = patientDetails;
             return View(patientDetails);
         }
         #endregion        
@@ -182,6 +189,45 @@ namespace RegistrationMVCCore.Controllers
                 ViewBag.Message = student.Name + " " +  " was successfuly registered. ";
             }
             return View();
+        }
+        #endregion
+
+        #region PatientNotes
+        public ActionResult PatientNotes(int? id)
+        {
+            var vm = new MyViewModel();
+          
+
+            var patientDetails = (from pA in _context.patientAccount
+                                  join g in _context.guardians on pA.GuardianID equals g.GuardianID
+                                  join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                                  join uA in _context.userAccount on pA.OccID equals uA.UserID
+                                  join nO in _context.notes on pA.PPS_No equals nO.PPS_No
+                                  where pA.PPS_No.Equals(id)
+                                  select new PatientDetailsViewModel
+                                  {
+                                      vmPatientTable = pA,
+                                      vmGuardian = g,
+                                      vmSchools = s,
+                                      vmUserAcc = uA,
+                                      vmNoteTable = nO
+                                  }).ToList();
+            var x = patientDetails;
+            return PartialView("_PatientNotes", patientDetails);
+            //return View(vm);
+        }
+        #endregion
+
+        #region PatientNotesDetails
+        public ActionResult PatientNotesDetails(int? pd, string dt)
+        {
+            DateTime mm = DateTime.Parse(dt);
+            var vm = new MyViewModel();
+            var noteDetails = _context.notes.Where(bb => bb.NoteDate == mm);            
+
+            var x = noteDetails;
+            return PartialView("_PatientNotes", noteDetails);
+            //return View(vm);
         }
         #endregion
 

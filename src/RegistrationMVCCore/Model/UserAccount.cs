@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -65,7 +67,9 @@ namespace RegistrationMVCCore.Model
     public class Notes_Table
     {
         [Key]
-        public int NoteID { get; set; }
+        public int NoteId { get; set; }
+        public DateTime NoteDate { get; set; }
+        public int PPS_No { get; set; }
         public string NoteTitle { get; set; }
         public string Details { get; set; }
     }
@@ -112,6 +116,8 @@ namespace RegistrationMVCCore.Model
         public Patient_Table vmPatientTable { get; set; }
         public Guardian_Table vmGuardian { get; set; }
         public UserAccount vmUserAcc { get; set; }
+        public Notes_Table vmNoteTable { get; set; }
+
     }
-     
+    
 }
