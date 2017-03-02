@@ -38,7 +38,7 @@
             @*<div class="col-md-1">@item.vmNoteTable.Details</div>*@
             @*@Html.ActionLink("Notes", "PatientNotes", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })*@
             <span class="btn btn-xs btn-warning"
-                  onclick="showActors('@item.vmPatientTable.PPS_No')">Show Notes</span>
+                  onclick="showPatient('@item.vmPatientTable.PPS_No')">Show Notes</span>
 
             @*<span class="btn btn-xs btn-warning"
                     onclick="showActorsDetails('@item.vmPatientTable.PPS_No','@item.vmPatientTable.OpenDate')">Details</span>*@
@@ -61,61 +61,51 @@
 @section scripts
 {
     <script>
-        function showActors(movieId) {
+        function showPatient(patientId) {
             
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotes")',
-                data: { id: movieId },
+                data: { id: patientId },
                 success: function (data) {
                     $('#Detail').hide();
                     $('#Detail1').hide();
-                   
-                    //$('#EditActor').hide();
-                    //$('#AddActor').hide();
 
                     $('#Detail').html(data);
                     $('#Detail').fadeIn("slow");
                 },
                 error: function (data) {
-                    alert("Now Here showActors");
                     $('#Detail').html('<h3>Error in retrieval</h3>');
                 }
             });
         }
-        function showActorsDetails(movieId, dateId) {
+        function showPatientDetails(patientId, dateId) {
            
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotesDetails")',
-                data: { pd: movieId, dt: dateId },
+                data: { pd: patientId, dt: dateId },
                 success: function (data) {
                     $('#Detail').hde();
                    
-                    //$('#EditActor').hide();
-                    //$('#AddActor').hide();
-
                     $('#Detail1').html(data);
                     $('#Detail1').fadeIn("slow");
                 },
                 error: function (data) {
                     $('#Detail1').fadeIn("slow");
                     alert("Error");
-                    $('#Detail1').html('<h3>Error in retrieval showActorsDetails</h3>');
+                    $('#Detail1').html('<h3>Error in retrieval showPatientDetails</h3>');
                 }
             });
         }
-        function showActorsDetails2(movieId, dateId) {
+        function showPatientDetails2(patientId, dateId) {
             alert("Show actors2 ");
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotesDetails")',
-                data: { pd: movieId, dt: dateId },
+                data: { pd: patientId, dt: dateId },
                 success: function (data) {
                     $('#Detail').hde();
-
-                    //$('#EditActor').hide();
-                    //$('#AddActor').hide();
 
                     $('#Detail1').html(data);
                     $('#Detail1').fadeIn("slow");
@@ -127,7 +117,5 @@
                 }
             });
         }
-
     </script>
-
 }

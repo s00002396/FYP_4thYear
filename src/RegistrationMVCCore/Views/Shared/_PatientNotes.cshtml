@@ -32,8 +32,9 @@
         else
         {
             <p>No notes found.</p>
-            <span class="btn btn-xs btn-warning"
-                onclick="showActorsDetails2('')">Details</span>
+            @*<span class="btn btn-xs btn-warning"
+                onclick="showPatientDetails2('')">Add a note</span>*@
+
             @Html.ActionLink("Add a note", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })
         }
     </div>

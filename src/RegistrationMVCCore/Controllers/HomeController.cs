@@ -139,15 +139,20 @@ namespace RegistrationMVCCore.Controllers
                                       //vmNoteTable = nO
                                   }).ToList();
 
-
-
-            //ViewData["noteList"] = new SelectList(_context.notes, "NoteID", "NoteTitle");
-            //SelectList list = new SelectList(_context.notes, "NoteID", "NoteTitle");
+            
             ViewBag.noteList = patientDetails;
-            var x = patientDetails;
+           
             return View(patientDetails);
         }
-        #endregion        
+        #endregion
+
+        #region Add Note
+        public IActionResult AddNote()
+        {
+            
+            return View();
+        }
+        #endregion
 
         #region Create
         public IActionResult CreateStudentRecord()
@@ -157,7 +162,8 @@ namespace RegistrationMVCCore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateStudentRecord(Patient_Table student)
+        public IActionResult CreateStudentRecord(PatientDetailsViewModel student)
+            //public IActionResult CreateStudentRecord(Patient_Table student)
         {
             List<SchoolList_Table> schoolList = _context.schoolLists.ToList();
             ViewBag.schoolList = new SelectList(schoolList, "SchoolID", "SchoolName");
@@ -182,11 +188,12 @@ namespace RegistrationMVCCore.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.patientAccount.Add(student);
+                _context.patientAccount.Add(student.vmPatientTable);
+                //add details to other tables and make identity
                 _context.SaveChanges();
 
                 ModelState.Clear();
-                ViewBag.Message = student.Name + " " +  " was successfuly registered. ";
+                ViewBag.Message = student.vmPatientTable.Name + " " +  " was successfuly added. ";
             }
             return View();
         }
@@ -214,7 +221,6 @@ namespace RegistrationMVCCore.Controllers
                                   }).ToList();
             var x = patientDetails;
             return PartialView("_PatientNotes", patientDetails);
-            //return View(vm);
         }
         #endregion
 
@@ -227,9 +233,10 @@ namespace RegistrationMVCCore.Controllers
 
             var x = noteDetails;
             return PartialView("_PatientNotes", noteDetails);
-            //return View(vm);
         }
         #endregion
+
+
 
         #region Logout
         public ActionResult Logout()
@@ -239,7 +246,7 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion
 
-        #region 
+        #region About
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
