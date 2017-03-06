@@ -29,21 +29,22 @@ namespace RegistrationMVCCore.Controllers
 
 
             if (search != null)
-            { 
+            {
                 var patientDetails = (from pA in _context.patientAccount
-                                        join g in _context.guardians on pA.GuardianID equals g.GuardianID
-                                        join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
-                                        //join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                                        //where otTask.OccID.Equals(occID)
-                                        where pA.PPS_No.Equals(searchID)
-                                        //where t.DueDate.Date == today
-                                        select new PatientDetailsViewModel
-                                        {
-                                            vmPatientTable = pA,
-                                            vmGuardian = g,
-                                            vmSchools = s
-                                        }).ToList();
-                
+                                      join g in _context.guardians on pA.GuardianID equals g.GuardianID
+                                      join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                                      join uA in _context.userAccount on pA.OccID equals uA.UserID
+                                      //join nO in _context.notes on pA.PPS_No equals nO.PPS_No
+                                      where pA.PPS_No.Equals(searchID)
+                                      select new PatientDetailsViewModel
+                                      {
+                                          vmPatientTable = pA,
+                                          vmGuardian = g,
+                                          vmSchools = s,
+                                          vmUserAcc = uA//,
+                                                        //vmNoteTable = nO
+                                      }).ToList();    
+
                 return View("Details", patientDetails);
             }
             else if (HttpContext.Session.GetString("UserID")!=null)
@@ -154,19 +155,26 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion
 
-        #region Create
+        #region Create A New Student
         public IActionResult CreateStudentRecord()
         {
             List<SchoolList_Table> schoolList = _context.schoolLists.ToList();
             ViewBag.schoolList = new SelectList(schoolList, "SchoolID", "SchoolName");
+
+            List<UserAccount> OTList = _context.userAccount.ToList();
+            ViewBag.OTList = new SelectList(OTList, "UserID", "FirstName");
+
             return View();
         }
         [HttpPost]
         public IActionResult CreateStudentRecord(PatientDetailsViewModel student)
-            //public IActionResult CreateStudentRecord(Patient_Table student)
         {
             List<SchoolList_Table> schoolList = _context.schoolLists.ToList();
             ViewBag.schoolList = new SelectList(schoolList, "SchoolID", "SchoolName");
+
+            List<UserAccount> OTList = _context.userAccount.ToList();
+            ViewBag.OTList = new SelectList(OTList, "UserID", "FirstName");
+
             #region hardCoded
             //Patient_Table newStudent = new Patient_Table()
             //{
@@ -186,10 +194,30 @@ namespace RegistrationMVCCore.Controllers
             //return RedirectToAction("Welcome");
             #endregion
 
+
             if (ModelState.IsValid)
             {
-                _context.patientAccount.Add(student.vmPatientTable);
-                //add details to other tables and make identity
+                _context.guardians.Add(student.vmGuardian);
+                _context.SaveChanges();
+
+                var noteDetails = (from p in _context.guardians
+                           where p.Name == student.vmGuardian.Name
+                           select p.GuardianID).Single();               
+
+                //******************************************************************
+                Patient_Table newStudent = new Patient_Table()
+                {
+                    Name = student.vmPatientTable.Name,
+                    AddressLineOne = student.vmPatientTable.AddressLineOne,
+                    City = student.vmPatientTable.City,
+                    County = student.vmPatientTable.County,
+                    SchoolID = student.vmPatientTable.SchoolID,
+                    GuardianID = Convert.ToInt32(noteDetails),
+                    OccID = student.vmPatientTable.OccID
+
+                };
+                _context.patientAccount.Add(newStudent);                
+               
                 _context.SaveChanges();
 
                 ModelState.Clear();
