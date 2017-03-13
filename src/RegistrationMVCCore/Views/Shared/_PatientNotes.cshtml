@@ -7,9 +7,9 @@
         li.Add(new SelectListItem() { Text = (item.vmNoteTable.NoteDate.ToString("dd/MM/yyyy")), Value = item.vmNoteTable.NoteDate.ToString("dd/MM/yyyy") });
     }
 }
-    @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-    @Html.DropDownList("Dates", li, "Select date")
-    </div>*@
+@{
+    var x = 0;
+}
     
     <div class="row" style="background-color:#31B0D5;font-weight:bold; color:#F7FFFF; ">
         <div class="col-md-3" style="border:solid" >Date</div>
@@ -25,18 +25,17 @@
                 <div class="col-md-3">@item.vmNoteTable.NoteDate.ToString("dd/MM/yyyy")</div>
                 <div class="col-md-3">@item.vmNoteTable.NoteTitle</div>
                 <div class="col-md-6">@item.vmNoteTable.Details</div>
-                
+                x = @item.vmPatientTable.PPS_No;
             }
-            @Html.ActionLink("Add a note", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })
+            @Html.ActionLink("Add new note", "AddNote", new { id = x }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
         }
         else
         {
-            <p>No notes found.</p>
-            @*<span class="btn btn-xs btn-warning"
-                onclick="showPatientDetails2('')">Add a note</span>*@
+            <p>No notes found.</p>           
 
-            @Html.ActionLink("Add a note", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })
-        }
+            @Html.ActionLink("Add a note", "AddNote", new { id = ViewBag.PatId }, new { @class = "btn btn-info", @style = "margin-top:10px" })
+        }      
+
     </div>
 
 

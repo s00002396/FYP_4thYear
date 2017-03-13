@@ -1,1 +1,55 @@
-﻿<h1>Add a note page</h1>
+﻿@model RegistrationMVCCore.Model.PatientDetailsViewModel
+
+<div class="row">
+    <div class="col-md-4" style="background-color:#F7F7F7; border-radius:6px; margin-left:380px; padding: 20px 25px 30px;">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @*@if (ViewBag.Message != null)
+                {
+                    <div class="form-control">
+                        <div class="col-md-12" style="color:blue">
+                            @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+                        </div>
+                    </div>
+                }*@
+                <h4 style="text-align:center">Note Details</h4>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <input asp-for="@Model.vmPatientTable.Name" placeholder="Full Name" class="form-control" />
+                        <span asp-validation-for="@Model.vmPatientTable.Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Title" class="form-control" />
+                            <span asp-validation-for="@Model.vmNoteTable.NoteTitle" class="text-danger"></span>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <textarea asp-for="@Model.vmNoteTable.Details" style="height:200px" placeholder="Note Details" class="form-control"></textarea>
+                        <span asp-validation-for="@Model.vmNoteTable.Details" class="text-danger"></span>                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit" />
+                    </div>
+                </div>       
+                
+            </div>
+        }@*end Using*@
+    </div>
+    <div>
+        <hr />
+        @Html.ActionLink("Save", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
+    </div>
+</div>
+@*<div>
+    <hr />
+    @Html.ActionLink("Save", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
+</div>*@

@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RegistrationMVCCore.Controllers
-{
-    
+{    
     public class HomeController : Controller
     {
         private OurDbContext _context;
@@ -148,10 +147,32 @@ namespace RegistrationMVCCore.Controllers
         #endregion
 
         #region Add Note
-        public IActionResult AddNote()
+        public IActionResult AddNote(int? id)
         {
-            
+            ViewBag.PatientID = id;
             return View();
+        }
+        [HttpPost]
+        public IActionResult AddNote(PatientDetailsViewModel student, int id)
+        {
+
+            ViewBag.PatientID = id;
+            //DateTime today = DateTime.Now("");
+            if (ModelState.IsValid)
+            {
+                Notes_Table newStudent = new Notes_Table()
+                {
+                    NoteTitle = student.vmNoteTable.NoteTitle,
+                    NoteDate = DateTime.Now,
+                    Details = student.vmNoteTable.Details,
+                    PPS_No = ViewBag.PatientID
+                };
+                var c = newStudent;
+                _context.notes.Add(newStudent);
+                _context.SaveChanges();
+            }
+
+                return View();
         }
         #endregion
 
@@ -231,7 +252,7 @@ namespace RegistrationMVCCore.Controllers
         public ActionResult PatientNotes(int? id)
         {
             var vm = new MyViewModel();
-          
+            ViewBag.PatId = id;
 
             var patientDetails = (from pA in _context.patientAccount
                                   join g in _context.guardians on pA.GuardianID equals g.GuardianID
@@ -262,9 +283,8 @@ namespace RegistrationMVCCore.Controllers
             var x = noteDetails;
             return PartialView("_PatientNotes", noteDetails);
         }
+        
         #endregion
-
-
 
         #region Logout
         public ActionResult Logout()

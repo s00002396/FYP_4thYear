@@ -1,9 +1,7 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
 
-<div class="container-fluid">
-    
-    <h2>Patient Details</h2>
-   
+<div class="container-fluid">    
+    <h2>Patient Details</h2>   
     <div class="row" style="background-color:#605CA8; color:#F7FFFF; margin-bottom:7px">
         <div class="col-md-1" style="border-right:2px solid white; ">Assigned To</div>
         <div class="col-md-1" style="border-right:2px solid white; ">PPS Number</div>
@@ -46,7 +44,7 @@
     }
     else
     {
-        <p>No records found.</p>
+      <p>No records found.</p>
     }
     </div>
     @*<div id="Detail" style="background-color:red">@Html.Partial("_PatientNotes"@*, Model.UserAccount)</div>*@
@@ -61,8 +59,7 @@
 @section scripts
 {
     <script>
-        function showPatient(patientId) {
-            
+        function showPatient(patientId) {            
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotes")',
