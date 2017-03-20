@@ -7,22 +7,17 @@
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                @*@if (ViewBag.Message != null)
+                @if (ViewBag.Message != null)
                 {
                     <div class="form-control">
                         <div class="col-md-12" style="color:blue">
                             @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
                         </div>
                     </div>
-                }*@
-                <h4 style="text-align:center">Note Details</h4>
+                }
+                <h4 style="text-align:center;color:#337AB7">New Note <i class="glyphicon glyphicon-paperclip" style="color:#337AB7"></i> </h4>
                 <hr />
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                        <input asp-for="@Model.vmPatientTable.Name" placeholder="Full Name" class="form-control" />
-                        <span asp-validation-for="@Model.vmPatientTable.Name" class="text-danger"></span>
-                    </div>
-                </div>
+                
                 <div class="form-group">
                         <div class="col-md-offset-2 col-md-8">
                             <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Title" class="form-control" />
@@ -37,17 +32,21 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
-                        <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Submit" />
-                    </div>
-                </div>       
+                        <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Add" />
+                        
+</div>
+                </div>  
+                <div>
+                    <hr />
+                    @Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info btn-lg ", @style = "margin-left:100px" })
+                    <a href="@Url.Action("Edit", new { id = 2 })">
+                    </a>
+                </div>     
                 
             </div>
         }@*end Using*@
     </div>
-    <div>
-        <hr />
-        @Html.ActionLink("Save", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
-    </div>
+    
 </div>
 @*<div>
     <hr />

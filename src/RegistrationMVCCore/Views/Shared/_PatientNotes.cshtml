@@ -33,10 +33,14 @@
         {
             <p>No notes found.</p>           
 
-            @Html.ActionLink("Add a note", "AddNote", new { id = ViewBag.PatId }, new { @class = "btn btn-info", @style = "margin-top:10px" })
+            @Html.ActionLink("Add a note", "AddNote", new { id = ViewBag.PatId }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
         }      
 
     </div>
+<div>
+    <hr />
+    @Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })
+</div>
 
 
 

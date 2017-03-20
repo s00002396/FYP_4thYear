@@ -155,9 +155,9 @@ namespace RegistrationMVCCore.Controllers
         [HttpPost]
         public IActionResult AddNote(PatientDetailsViewModel student, int id)
         {
-
             ViewBag.PatientID = id;
-            //DateTime today = DateTime.Now("");
+            
+            
             if (ModelState.IsValid)
             {
                 Notes_Table newStudent = new Notes_Table()
@@ -170,9 +170,11 @@ namespace RegistrationMVCCore.Controllers
                 var c = newStudent;
                 _context.notes.Add(newStudent);
                 _context.SaveChanges();
+                ModelState.Clear();
+                ViewBag.Message =  "Note was successfuly added. ";
+                //ViewBag.Message =  "Note for " +x.vmPatientTable.Name + " were successfuly added. ";
             }
-
-                return View();
+            return View();
         }
         #endregion
 
