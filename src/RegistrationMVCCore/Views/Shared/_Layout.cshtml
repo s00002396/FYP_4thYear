@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link rel="stylesheet" href="/lib/w3-theme-blue.css">
     <title>@ViewData["Title"] - FYP</title>
 
     <environment names="Development">
@@ -18,7 +20,7 @@
     </environment>
 </head>
 <body>
-    <div style="background-color:#560E6C;" class="navbar navbar-inverse navbar-fixed-top">
+    <div  class="navbar navbar-inverse navbar-fixed-top w3-blue ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,10 +38,10 @@
                     
                     @if (Context.Session.GetString("UserID") != null)
                     {
-                        <li><a style="color:white;margin-right:50px" asp-area="" asp-controller="Home" asp-action="Welcome">Home</a></li>
-                        <li><a style="color:white; margin-right:50px" asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
-                        <li><a style="color:white; margin-right:300px" asp-area="" asp-controller="Home" asp-action="CreateStudentRecord">Add Patient</a></li>
-                        <li><a style="color:white" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
+                        <li><a class="w3-hover-light-blue w3-hover-text-white" style="color:white;margin-right:50px; font-size:20px; font-weight:bold" asp-area="" asp-controller="Home" asp-action="Welcome"><i class="glyphicon glyphicon-home"></i>&nbsp;Home</a></li>
+                        @*<li><a class="w3-hover-light-blue w3-hover-text-white" style="color:white; font-size:20px; font-weight:bold; margin-right:50px" asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                        <li><a class="w3-hover-light-blue w3-hover-text-white" style="color:white; font-size:20px; font-weight:bold; margin-right:300px" asp-area="" asp-controller="Home" asp-action="CreateStudentRecord">Add Patient</a></li>*@
+                        @*<li><a class="w3-hover-light-blue w3-hover-text-white" style="color:white; font-size:20px; font-weight:bold;margin-left:550px" asp-area="" asp-controller="Home" asp-action="Logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout</a></li>*@
                     }
                     else
                     {

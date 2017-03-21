@@ -69,7 +69,7 @@ namespace RegistrationMVCCore.Controllers
                                     }).ToList();
 
                 //var test = myNewTasks;                
-                
+                //return PartialView("_Welcome", myNewTasks);
                 return View(myNewTasks);
             }
             else

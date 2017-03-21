@@ -1,0 +1,37 @@
+﻿@model ICollection<RegistrationMVCCore.Model.MyViewModel>
+
+<div class="panel-heading" style="font:bold; background-color:#2196F3; color:#F7FFFF"><strong>Patient Name&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
+<div class="panel-body" style="height:383px">
+    <div class="right-inner-addon" style="width:170px;">
+        @if (Model.Any())
+        {
+            <table class="table table-condensed table-hover">
+                @foreach (var item in Model)
+                {
+                    @if (@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy") == @ViewBag.TodaysDate.ToString("dd/MM/yyyy"))
+                    {
+                        <tr>
+                            <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                            @if (@item.vmTaskTable.Completed.ToString() == "False")
+                            {
+                                <td style="color:red">No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            }
+                            else
+                            {
+                                <td style="color:green">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            }
+                            <td>@Html.ActionLink("Details", "Details", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
+                        </tr>
+                    }
+                }@*end foreach*@
+            </table>
+        }@*end if(any)*@
+        else
+        {
+            <p>No records found. </p>
+        }
+    </div>
+</div>
