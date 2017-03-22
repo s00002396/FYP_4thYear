@@ -224,8 +224,8 @@ namespace RegistrationMVCCore.Controllers
                 _context.SaveChanges();
 
                 var noteDetails = (from p in _context.guardians
-                           where p.Name == student.vmGuardian.Name
-                           select p.GuardianID).Single();               
+                                   where p.Name == student.vmGuardian.Name
+                                   select p.GuardianID).Single();
 
                 //******************************************************************
                 Patient_Table newStudent = new Patient_Table()
@@ -247,6 +247,105 @@ namespace RegistrationMVCCore.Controllers
                 ViewBag.Message = student.vmPatientTable.Name + " " +  " was successfuly added. ";
             }
             return View();
+        }
+        #endregion
+
+        #region Delete Patient
+        public IActionResult DeletePatient(int? id)
+        {
+            ViewBag.PatientID = id;
+
+            if (HttpContext.Session.GetString("UserID") != null)
+            {
+                //call up all records wit todays date..                
+                DateTime today = DateTime.Today;
+                ViewBag.TodaysDate = today;
+                var occID = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+                var myNewTasks = (from pA in _context.patientAccount
+                                  join gA in _context.guardians on pA.GuardianID equals gA.GuardianID
+                                  join uA in _context.userAccount on pA.OccID equals uA.UserID
+                                  //join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
+                                  where pA.OccID.Equals(occID)
+                                  //where otTask.OccID.Equals(occID)
+                                  //where t.DueDate.Date == today
+                                  select new PatientDetailsViewModel
+                                  {
+                                      vmGuardian = gA,
+                                      vmUserAcc = uA,
+                                      //vm = otTask,
+                                      vmPatientTable = pA
+                                  }).ToList();
+
+                //var myNewTasks1 = (from t in _context.tasks
+                //                   join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
+                //                   join uA in _context.userAccount on otTask.OccID equals uA.UserID
+                //                   join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
+                //                   where otTask.OccID.Equals(occID)
+                //                   //where otTask.OccID.Equals(occID)
+                //                   //where t.DueDate.Date == today
+                //                   select new MyViewModel
+                //                   {
+                //                       vmTaskTable = t,
+                //                       vmUserAcc = uA,
+                //                       vmTPOT = otTask,
+                //                       vmPatientTable = pA
+                //                   }).ToList();
+
+                //var test = myNewTasks;                
+                //return PartialView("_DeleteList", myNewTasks1);
+                return View(myNewTasks);
+            } 
+            return View();
+        }
+        //[HttpPost]
+        public IActionResult DeletePatient1(int? id)
+        {
+            ViewBag.PatientID = id;
+
+            Patient_Table removePatient = _context.patientAccount.Where(c => c.PPS_No == id).Single();
+            Guardian_Table removeGuardian = _context.guardians.Where(c => c.GuardianID == removePatient.GuardianID).Single();
+            try
+            {
+                Notes_Table removeNotes = _context.notes.Where(c => c.PPS_No == removePatient.PPS_No).Single();
+                _context.notes.Remove(removeNotes);
+            }
+            catch (Exception)
+            {
+                
+            }
+            //Notes_Table removeNotes = _context.notes.Where(c => c.PPS_No == removePatient.PPS_No).Single();
+           
+            
+            if (ModelState.IsValid)
+            {
+                //var patientDetails = (from pA in _context.patientAccount
+                //                      join g in _context.guardians on pA.GuardianID equals g.GuardianID
+                //                      join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                //                      join uA in _context.userAccount on pA.OccID equals uA.UserID
+                //                      //join nO in _context.notes on pA.PPS_No equals nO.PPS_No
+                //                      where pA.PPS_No.Equals(id)
+                //                      select new PatientDetailsViewModel
+                //                      {
+                //                          vmPatientTable = pA,
+                //                          vmGuardian = g,
+                //                          vmSchools = s,
+                //                          vmUserAcc = uA//,
+                //                                        //vmNoteTable = nO
+                //                      }).ToList();
+
+                //var x = patientDetails;
+                
+                //_context.patientAccount.Remove(x);
+
+                _context.patientAccount.Remove(removePatient);
+                _context.guardians.Remove(removeGuardian);
+                //_context.notes.Remove(removeNotes);
+                _context.SaveChanges();
+                ViewBag.Message = "Patient was successfuly removed. ";
+            }
+
+            
+            return RedirectToAction("DeletePatient");
         }
         #endregion
 
