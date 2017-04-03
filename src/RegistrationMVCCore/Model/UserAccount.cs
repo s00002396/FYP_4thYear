@@ -83,11 +83,11 @@ namespace RegistrationMVCCore.Model
     }
     public class Task_Patient_OT_Table
     {
-        [Key, Column(Order = 0)]
+        //[Key, Column(Order = 0)]
         public int TaskID { get; set; }
-        [Key, Column(Order = 1)]
+        //[Key, Column(Order = 1)]
         public int PPS_No { get; set; }
-        [Key, Column(Order = 2)]
+        
         public int OccID { get; set; }
     }
     public class Task_Table
@@ -117,7 +117,7 @@ namespace RegistrationMVCCore.Model
         public Guardian_Table vmGuardian { get; set; }
         public UserAccount vmUserAcc { get; set; }
         public Notes_Table vmNoteTable { get; set; }
-
+        public Task_Patient_OT_Table vmTPOT { get; set; }
     }
     
 }

@@ -48,7 +48,7 @@
     {
         @foreach (var item in Model)
         {
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:100px; cursor:crosshair">
+            <div class="w3-container  w3-cell w3-cell-middle" style="width:100px">
                 @item.vmUserAcc.FirstName
             </div>
             <div class="w3-container  w3-cell w3-cell-middle" style="width:75px">
@@ -85,8 +85,6 @@
             <div class="w3-container  w3-cell w3-cell-middle">
                 <span onclick="showPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px" class="glyphicon glyphicon-info-sign"></i></span>
             </div>
-            <hr /><br />
-
         }
     }
     else
@@ -94,35 +92,7 @@
         <p>No records found.</p>
     }
 </div>@*Row*@
-<hr />
-<div class="w3-container  w3-cell w3-cell-middle" style="background-color:white">
-    @foreach (var item in Model)
-    {
-        <div class="w3-container  w3-cell w3-cell-middle" style="float:right; color:#2196F3">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPatientDetails3('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Tasks</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <span onclick="showPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <span onclick="showPatientDetails2('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <span onclick="showPatientDetails4('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
-
-
-            @*@Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })*@
-
-        </div>
-    }
-
-</div>
-
-<div id="Detail2">
-
-
-</div>
-<div id="Detail3">
-
-
-</div>
 <div id="Detail"></div>
 
 @*</div>*@@*Container*@
@@ -137,9 +107,8 @@
                 data: { id: patientId },
                 success: function (data) {
                     $('#Detail').hide();
-                    $('#Detail2').hide();
                     $('#Detail1').hide();
-                    $('#Detail3').hide();
+
                     $('#Detail').html(data);
                     $('#Detail').fadeIn("slow");
                 },
@@ -163,76 +132,28 @@
                 error: function (data) {
                     $('#Detail1').fadeIn("slow");
                     alert("Error");
-                    $('#Detail1').html('<h3>Error in retrieval of Details</h3>');
+                    $('#Detail1').html('<h3>Error in retrieval showPatientDetails</h3>');
                 }
             });
         }
-        function showPatientDetails2(patientId) {
-            //alert("Show actors2 " + patientId);
+        @*function showPatientDetails2(patientId, dateId) {
+            alert("Show actors2 ");
             $.ajax({
                 type: "GET",
-                url: '@Url.Action("AddNote")',
-                data: { id: patientId },
+                url: '@Url.Action("PatientNotesDetails")',
+                data: { pd: patientId, dt: dateId },
                 success: function (data) {
-                    $('#Detail').hide();
-                    $('#Detail2').hide();
-                    //alert("Show actors2 ");
-                    $('#Detail2').html(data);
-                    $('#Detail2').fadeIn("slow");
+                    $('#Detail').hde();
+
+                    $('#Detail1').html(data);
+                    $('#Detail1').fadeIn("slow");
                 },
                 error: function (data) {
-                    alert("Show actors2 error ");
-                    $('#Detail2').fadeIn("slow");
+                    $('#Detail1').fadeIn("slow");
                     alert("Error");
-                    $('#Detail2').html('<h3>Error in retrieval of Details (Add note)</h3>');
+                    $('#Detail1').html('<h3>Error in retrieval showActorsDetails</h3>');
                 }
             });
-        }
-        function showPatientDetails3(patientId) {
-            //alert("Show actors2 " + patientId);
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("Welcome")',
-                data: { id: patientId },
-                success: function (data) {
-                    window.location = '/Home/Welcome';
-                    //$('#Detail').hide();
-                    //$('#Detail2').hide();
-                    //alert("showPatientDetails3 ");
-                    //$('#Detail2').html(data);
-                    //$('#Detail2').fadeIn("slow");
-                },
-                error: function (data) {
-                    alert("Show actors2 error ");
-                    $('#Detail2').fadeIn("slow");
-                    alert("Error");
-                    $('#Detail2').html('<h3>Error in retrieval of Details (Welcome)</h3>');
-                }
-            });
-        }
-        function showPatientDetails4(patientId) {
-            //alert("Patient ID " + patientId);
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("ReassignPatient")',
-                data: { id: patientId },
-                success: function (data) {
-                    //window.location = 'ReassignPatient';
-                    //alert("Show student 2 ");
-                    $('#Detail').hide();
-                    $('#Detail2').hide();
-                    $('#Detail1').hide();
-                    //alert("Show student 1 ");
-                    $('#Detail3').html(data);
-                    $('#Detail3').fadeIn("slow");
-                },
-                error: function (data) {
-                    alert("Error ");
-                    $('#Detail2').fadeIn("slow");
-                    //alert("Error");
-                    $('#Detail2').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
-                }
-            });
-        }
+        }*@
     </script>
 }

@@ -16,7 +16,8 @@
         <section style="height:50px;width:590px;float:right;margin-left:30px ">
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test"><a data-toggle="tab" href="#home">Todays Tasks</a></li>
-                <li class="test"><a data-toggle="tab" href="#menu1">All Tasks</a></li>
+                <li class="test1"><a data-toggle="tab" href="#menu1">All Tasks</a></li>
+                @*<li class="test2"><a data-toggle="tab" href="#menu2">All Patients</a></li>*@
             </ul>
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
@@ -33,6 +34,13 @@
                         </div>
                     </div>
                 </div>
+                @*<div id="menu2" class="tab-pane fade">
+                    <div class="box" style="width:590px; ">
+                        <div class="w3-card-4" style="background-color:#FFFFFF">
+                            @Html.Partial("_TomorrowsTasks", Model)
+                        </div>
+                    </div>
+                </div>*@
             </div>
         </section>
 
@@ -58,6 +66,7 @@
                 </header>
                 <div class="w3-container" style="margin:20px; height:100px; ">
                     <ul style="list-style:none">
+                        <li style="padding:5px 0 "><a asp-area="" asp-controller="Home" asp-action="ViewAllPatients"><i class="glyphicon glyphicon-user"></i>&nbsp;View All Patient</a></li>
                         <li style="padding:5px 0 "><a asp-area="" asp-controller="Home" asp-action="CreateStudentRecord"><i class="glyphicon glyphicon-user"></i>&nbsp;Add Patient</a></li>
                         <li style="padding:5px 0"><a asp-area="" asp-controller="Home" asp-action="DeletePatient"><i class="glyphicon glyphicon-remove"></i>&nbsp;Remove Patient</a></li> 
                         <li style="padding:5px 0"><a asp-area="" asp-controller="Home" asp-action="Logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout</a></li>                      
@@ -70,10 +79,13 @@
                 <header class="w3-container w3-blue">
                     <h4>Admin &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
                 </header>
-                <div class="w3-container" style="margin:20px; height:85px">
+                <div class="w3-container" style="margin:20px; height:100px">
                     <ul style="list-style:none">
                         <li style="padding:5px 0">
                             <a asp-area="" asp-controller="Home" asp-action="Register"><i class="glyphicon glyphicon-user"></i>&nbsp;Register a new OT</a>
+                        </li>
+                        <li style="padding:5px 0">
+                            <a asp-area="" asp-controller="Home" asp-action="ReassignPatient"><i class="glyphicon glyphicon-remove"></i>&nbsp;Reassign Patient</a>
                         </li>
                         <li style="padding:5px 0">
                             <a asp-area="" asp-controller="Home" asp-action="Register"><i class="glyphicon glyphicon-remove"></i>&nbsp;Remove OT</a>
@@ -87,7 +99,7 @@
 
 @section scripts
 {
-    <script>
+    @*<script>
         function showActors(movieId) {
             // When Leader name clicked, invoke Controler action method to return partial view and ajax it into place
             $.ajax({
@@ -111,6 +123,6 @@
         }
 
 
-    </script>
+    </script>*@
 
 }

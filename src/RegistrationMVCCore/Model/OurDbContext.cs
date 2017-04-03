@@ -8,6 +8,10 @@ namespace RegistrationMVCCore.Model
 {
     public class OurDbContext:DbContext
     {
+        public OurDbContext()
+        {
+
+        }
         public OurDbContext(DbContextOptions<OurDbContext> options):base(options)
         {
 
@@ -17,6 +21,7 @@ namespace RegistrationMVCCore.Model
         public DbSet<Guardian_Table> guardians { get; set; }
         
         public DbSet<NotePatient_Table> notePatient { get; set; }
+        //public DbSet<Task_Patient_OT_Table> otTask { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
