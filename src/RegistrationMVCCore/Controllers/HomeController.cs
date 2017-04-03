@@ -198,7 +198,9 @@ namespace RegistrationMVCCore.Controllers
                 ViewBag.Message = "Note was successfuly added. ";
                 //ViewBag.Message =  "Note for " +x.vmPatientTable.Name + " were successfuly added. ";
             }
-            return View();
+            //return View();
+            //return PartialView("_AddNote");
+            return RedirectToAction("Welcome");
         }
         #endregion
 
@@ -363,8 +365,8 @@ namespace RegistrationMVCCore.Controllers
                 //};
                 patient.OccID = student.vmPatientTable.OccID;
                 _context.patientAccount.Update((patient));
-                otp.OccID = student.vmPatientTable.OccID;
-                _context.otTasks.Update(otp);
+                //otp.OccID = student.vmPatientTable.OccID;
+                //_context.otTasks.Update(otp);
 
                // _context.patientAccount.Update(newStudent);
                 _context.SaveChanges();

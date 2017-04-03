@@ -9,12 +9,15 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.myClass{
+    max-width: 1580px !important;
+}
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 880px;
 }
 
 /* Carousel */
