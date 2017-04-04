@@ -1,4 +1,5 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
+
 <div class="w3-cell-row" style="height:35px">
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
         Patient Name
@@ -17,42 +18,35 @@
     </div>
 </div>
     
-    <div class="panel-body" style="height:383px">
-        <div class="right-inner-addon" style="width:569px">
-            @if (ViewBag.Message != null)
-            {
-                <div class="form-control">
-                    <div class="col-md-12" style="color:blue">
-                        @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
-                    </div>
+<div class="panel-body" style="height:383px">
+    <div class="right-inner-addon" style="width:569px">
+        @if (ViewBag.Message != null)
+        {
+            <div class="form-control">
+                <div class="col-md-12" style="color:blue">
+                    @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
                 </div>
-            }
-            @if (Model.Any())
+            </div>
+        }
+        @if (Model.Any())
+        {
+            <table class="table table-condensed table-hover">
+                @foreach (var item in Model)
             {
-                <table class="table table-condensed table-hover">
-                    @foreach (var item in Model)
-                {
-                        <tr>
-                            <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>@item.vmPatientTable.AddressLineOne&nbsp;&nbsp;&nbsp;</td>
-                            <td>@item.vmGuardian.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        @*@if (@item.vmTaskTable.Completed.ToString() == "False")
-                            {
-                                <td style="color:red">No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            }
-                            else
-                            {
-                                <td style="color:green">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            }*@
-                        <td>@Html.ActionLink("Delete", "DeletePatient1", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
-                    </tr>
-                    }
-                </table>
-            }
-            else
-            {
-                <p>No records found.</p>
-            }
-        </div>
+                    <tr>
+                        <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>@item.vmPatientTable.AddressLineOne&nbsp;&nbsp;&nbsp;</td>
+                        <td>@item.vmGuardian.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  
+                    <td>@Html.ActionLink("Delete", "DeletePatient1", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
+                </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
     </div>
+</div>

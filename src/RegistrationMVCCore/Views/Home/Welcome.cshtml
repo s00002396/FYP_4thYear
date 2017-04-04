@@ -8,6 +8,7 @@
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test"><a data-toggle="tab" href="#home">Todays Tasks</a></li>
                 <li class="test1"><a data-toggle="tab" href="#menu1">All Tasks</a></li>
+                @*<li class="active test"><a data-toggle="tab" href="#home1">All Patients</a></li>*@ 
             </ul>
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
@@ -23,7 +24,14 @@
                            @Html.Partial("_TomorrowsTasks", Model) 
                         </div>
                     </div>
-                </div>               
+                </div>  
+                @*<div id="home1" class="tab-pane fade in active">
+                    <div class="box" style="width:590px;">
+                        <div class="w3-card-4" style="background-color:#FFFFFF">
+                            @Html.Partial("_DeleteList", Model)
+                        </div>
+                    </div>
+                </div>*@             
             </div>
         </section>
 
@@ -79,33 +87,3 @@
     </aside>
  </section>
 </div>
-
-@section scripts
-{
-    @*<script>
-        function showActors(movieId) {
-            // When Leader name clicked, invoke Controler action method to return partial view and ajax it into place
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("ActorsById")',
-                data: { id: movieId },
-                success: function (data) {
-                    $('#Detail').hide();
-                    $('#EditActor').hide();
-                    $('#AddActor').hide();
-                    $('#Detail').html(data);
-                    $('#Detail').fadeIn("slow");
-                    $('#AddActor').find('input[name="actorId"]').val(""); // set campId for the Create Child form
-                    $('#AddActor').find('input[name="actorName"]').val("");
-                    $('#AddActor').fadeIn("slow");
-                },
-                error: function (data) {
-                    $('#Detail').html('<h3>Error in retrieval</h3>');
-                }
-            });
-        }
-
-
-    </script>*@
-
-}

@@ -2,7 +2,7 @@
 <div class="w3-container">
     <h2>Patient Details</h2>
 </div>
-
+<h1>NOT USING _SearchDetails</h1>
 <div class="w3-cell-row">
     <div class="w3-container w3-blue w3-cell w3-cell-top" style="border-right:2px solid white; ">
         Assigned To
@@ -100,7 +100,7 @@
 @section scripts
 {
     <script>
-        function showPatient(patientId) {
+        @*function showPatient(patientId) {
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotes")',
@@ -135,25 +135,6 @@
                     $('#Detail1').html('<h3>Error in retrieval showPatientDetails</h3>');
                 }
             });
-        }
-        @*function showPatientDetails2(patientId, dateId) {
-            alert("Show actors2 ");
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("PatientNotesDetails")',
-                data: { pd: patientId, dt: dateId },
-                success: function (data) {
-                    $('#Detail').hde();
-
-                    $('#Detail1').html(data);
-                    $('#Detail1').fadeIn("slow");
-                },
-                error: function (data) {
-                    $('#Detail1').fadeIn("slow");
-                    alert("Error");
-                    $('#Detail1').html('<h3>Error in retrieval showActorsDetails</h3>');
-                }
-            });
-        }*@
+        }*@       
     </script>
 }

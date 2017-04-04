@@ -1,23 +1,11 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
-@{
-    List<SelectListItem> li = new List<SelectListItem>();
 
-    foreach (var item in Model)
-    {
-        li.Add(new SelectListItem() { Text = (item.vmNoteTable.NoteDate.ToString("dd/MM/yyyy")), Value = item.vmNoteTable.NoteDate.ToString("dd/MM/yyyy") });
-    }
-}
-@{
-    var x = 0;
-}
-
-<div class="row" style="background-color:#31B0D5;font-weight:bold; color:#F7FFFF; ">
+<div class="row" style="background-color:#31B0D5;font-weight:bold; color:#F7FFFF;">
     <div class="col-md-3" style="border:solid">Date</div>
     <div class="col-md-3" style="border:solid">Title</div>
     <div class="col-md-6" style="border:solid">Details</div>
 </div>
-
-<div class="row" id="Detail1" style="padding-bottom:25px;background-color:#F7F7F7">
+<div class="row" style="padding-bottom:25px;background-color:#F7F7F7">
     @if (Model.Any())
     {
         @foreach (var item in Model)
@@ -25,23 +13,11 @@
             <div class="col-md-3">@item.vmNoteTable.NoteDate.ToString("dd/MM/yyyy")</div>
                 <div class="col-md-3">@item.vmNoteTable.NoteTitle</div>
                 <div class="col-md-6">@item.vmNoteTable.Details</div>
-            x = @item.vmPatientTable.PPS_No;
         }
-        @*@Html.ActionLink("Add new note", "AddNote", new { id = x }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })*@
     }
     else
     {
-        <p>No notes found.</p>
-
-            @Html.ActionLink("Add a note", "AddNote", new { id = ViewBag.PatId }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
+      <p>No notes found.</p>
+      @Html.ActionLink("Add a note", "AddNote", new { id = ViewBag.PatId }, new { @class = "btn btn-info", @style = "margin-top:10px;float:right" })
     }
-
 </div>
-<div>
-    @*<hr />*@
-    @*@Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })*@
-</div>
-
-
-
-

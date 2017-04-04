@@ -1,135 +1,123 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
-<div class="w3-container">
-    <h2 class="glyphicon glyphicon-user" style="color:#2196F3"><span>&nbsp;Patient Details</span></h2>
-</div>
+<div class="container" style="background-color:#FfFfFf; height:500px">
+    <div class="w3-container">
+        <h2 class="glyphicon glyphicon-user" style="color:#2196F3"><span>&nbsp;Patient Details</span></h2>
+    </div>
 
-<div class="w3-cell-row" style="height:50px">
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Assigned To
+    <div class="w3-cell-row" style="height:50px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Assigned To
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            PPS No
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Student Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Address Line1
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            City
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            County
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Guardian Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Phone
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            School Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Open Date
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Close Date
+        </div>
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        PPS No
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Student Name
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Address Line1
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        City
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        County
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Guardian Name
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Phone
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        School Name
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Open Date
-    </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Close Date
-    </div>
-    @*<div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Patient Notes
-    </div>*@
-</div>
 
-@*<div class="container-fluid" >*@
-<div class="w3-cell-row" style="height:50px">
-    @if (Model.Any())
-    {
+    <div class="w3-cell-row" style="height:50px">
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:108px;text-align:center">
+                    @item.vmUserAcc.FirstName
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:80px;text-align:center;">
+                    @item.vmPatientTable.PPS_No
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:90px;text-align:center">
+                    @item.vmPatientTable.Name
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;text-align:center">
+                    @item.vmPatientTable.AddressLineOne
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="width:0px; text-align:center">
+                    @item.vmPatientTable.City
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="width:0px;text-align:center">
+                    @item.vmPatientTable.County
+                </div>
+
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:130px; text-align:center">
+                    @item.vmGuardian.Name
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:60px;text-align:center">
+                    @item.vmGuardian.PhoneNo
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;width:110px; text-align:center">
+                    @item.vmSchools.SchoolName
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="width:30px;text-align:center">
+                    @item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;width:30px; text-align:center">
+                    @item.vmPatientTable.CloseDate.ToString()
+                </div>
+                <br />
+
+            }
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
+    </div>@*Row*@
+    <hr />
+
+    <div class="w3-container  w3-cell w3-cell-middle" style="background-color:white; padding-bottom:15px">
         @foreach (var item in Model)
         {
-            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:108px;text-align:center">
-                @item.vmUserAcc.FirstName
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:80px;text-align:center;">
-                @item.vmPatientTable.PPS_No
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:90px;text-align:center">
-                @item.vmPatientTable.Name
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;text-align:center">
-                @item.vmPatientTable.AddressLineOne
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:0px; text-align:center">
-                @item.vmPatientTable.City
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:0px;text-align:center">
-                @item.vmPatientTable.County
-            </div>
+            <div class="w3-container  w3-cell w3-cell-middle" style="float:right; color:#2196F3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="backToTasks('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Tasks</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <div class="w3-container w3-cell w3-cell-middle" style="min-width:130px; text-align:center">
-                @item.vmGuardian.Name
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="min-width:60px;text-align:center">
-                @item.vmGuardian.PhoneNo
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;width:110px; text-align:center">
-                @item.vmSchools.SchoolName
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:30px;text-align:center">
-                @item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;width:30px; text-align:center">
-                @item.vmPatientTable.CloseDate.ToString()
-            </div>
-            @*<div class="w3-container  w3-cell w3-cell-middle">
-                <span onclick="showPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px" class="glyphicon glyphicon-info-sign"></i></span>
-            </div>*@
-            @*<hr />*@
-    <br />
+                <span onclick="viewNotes('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                <span onclick="addNote('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <span onclick="addTask('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <span onclick="reassignPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
+            </div>
         }
-    }
-    else
-    {
-        <p>No records found.</p>
-    }
-</div>@*Row*@
-<hr />
-<div class="w3-container  w3-cell w3-cell-middle" style="background-color:white; padding-bottom:15px">
-    @foreach (var item in Model)
-    {
-        <div class="w3-container  w3-cell w3-cell-middle" style="float:right; color:#2196F3">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPatientDetails3('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Tasks</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <span onclick="viewNotes('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <span onclick="addNote('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <span onclick="addTask('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <span onclick="reassignPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
-
-            
-
-            @*@Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })*@
-
-        </div>
-    }
-
+    </div>
+    <div id="Error"></div>
+    <div id="AddNoteDetail"></div> @*AddNote*@
+    <div id="ReassignPatientDetail"></div>@*ReassignPatient*@
+    <div id="NoteDetail"></div> @*View Notes*@
+    <div id="TaskDetail"></div> @*Add Task*@
 </div>
-
-<div id="AddNoteDetail"></div> @*AddNote*@
-<div id="ReassignPatientDetail"></div>@*ReassignPatient*@
-<div id="NoteDetail"></div> @*View Notes*@
-<div id="TaskDetail"></div> @*Add Task*@
-
 @*</div>*@@*Container*@
 
 @section scripts
 {
     <script>
-
         /**********view Patient Notes**********/
         function viewNotes(patientId) {
             $.ajax({
@@ -147,23 +135,6 @@
                 },
                 error: function (data) {
                     $('#NoteDetail').html('<h3>Error in retrieval</h3>');
-                }
-            });
-        }
-        function showPatientDetails(patientId, dateId) {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("PatientNotesDetails")',
-                data: { pd: patientId, dt: dateId },
-                success: function (data) {
-                    $('#NoteDetail').hde();
-                    $('#Detail1').html(data);
-                    $('#Detail1').fadeIn("slow");
-                },
-                error: function (data) {
-                    $('#Detail1').fadeIn("slow");
-                    alert("Error");
-                    $('#Detail1').html('<h3>Error in retrieval of Details</h3>');
                 }
             });
         }
@@ -198,7 +169,7 @@
                     $('#Detail1').hide();
                     $('#AddNoteDetail').hide();
                     $('#ReassignPatientDetail').hide();
-                    $('#TaskDetail').hide();                   
+                    $('#TaskDetail').hide();
                     $('#TaskDetail').html(data);
                     $('#TaskDetail').fadeIn("slow");
                 },
@@ -208,25 +179,18 @@
                 }
             });
         }
-        function showPatientDetails3(patientId) {
-            //alert("Show actors2 " + patientId);
+        /*********Back To Tasks**************/
+        function backToTasks(patientId) {
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("Welcome")',
                 data: { id: patientId },
                 success: function (data) {
                     window.location = '/Home/Welcome';
-                    //$('#Detail').hide();
-                    //$('#Detail2').hide();
-                    //alert("showPatientDetails3 ");
-                    //$('#Detail2').html(data);
-                    //$('#Detail2').fadeIn("slow");
                 },
                 error: function (data) {
-                    alert("Show actors2 (showPatientDetails3) error ");
-                    $('#AddNoteDetail').fadeIn("slow");
-                    alert("Error");
-                    $('#AddNoteDetail').html('<h3>Error in retrieval of Details (Welcome)</h3>');
+                    $('#Error').fadeIn("slow");
+                    $('#Error').html('<h3>Error in retrieval of Details (backToTasks)</h3>');
                 }
             });
         }

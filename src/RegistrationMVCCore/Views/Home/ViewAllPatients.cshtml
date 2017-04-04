@@ -2,7 +2,7 @@
 <div class="w3-container">
     <h2 class="glyphicon glyphicon-user" style="color:#2196F3; margin-bottom:15px"><span>&nbsp;All Patients</span></h2>
 </div>
-
+<h1>NOT USING</h1>
 <div class="w3-cell-row" style="height:50px">
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
         Assigned To
@@ -37,63 +37,7 @@
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
         View
     </div>
-    @*<div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Patient Notes
-    </div>*@
 </div>
-
-@*<div class="container-fluid" >*@
-@*<div class="w3-cell-row">
-    @if (Model.Any())
-    {
-        @foreach (var item in Model)
-        {
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:100px">
-                @item.vmUserAcc.FirstName
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:75px">
-                @item.vmPatientTable.PPS_No
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:115px">
-                @item.vmPatientTable.Name
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:115px">
-                @item.vmPatientTable.AddressLineOne
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:63px">
-                @item.vmPatientTable.City
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:73px">
-                @item.vmPatientTable.County
-            </div>
-
-            <div class="w3-container w3-cell w3-cell-middle" style="width:113px">
-                @item.vmGuardian.Name
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:43px">
-                @item.vmGuardian.PhoneNo
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:103px">
-                @item.vmSchools.SchoolName
-            </div>
-            <div class="w3-container w3-cell w3-cell-middle" style="width:63px">
-                @item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle" style="width:63px">
-                @item.vmPatientTable.CloseDate.ToString()
-            </div>
-            <div class="w3-container  w3-cell w3-cell-middle">
-                <span onclick="showPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px" class="glyphicon glyphicon-info-sign"></i></span>
-            </div>
-            <hr /><br />
-        }
-    }
-    else
-    {
-        <p>No records found.</p>
-    }
-</div>*@@*Row*@
-@*<hr />*@
 <div class="w3-container  w3-cell w3-cell-middle" style="background-color:white">  
 
 </div>
@@ -160,7 +104,7 @@
                                             }
                                         });
                                     }
-                                    function showPatientDetails(patientId, dateId) {
+                                    @*function showPatientDetails(patientId, dateId) {
 
                                         $.ajax({
                                             type: "GET",
@@ -178,8 +122,8 @@
                                                 $('#Detail1').html('<h3>Error in retrieval of Details</h3>');
                                             }
                                         });
-                                    }
-                                    function showPatientDetails2(patientId) {
+                                    }*@
+                                    @*function showPatientDetails2(patientId) {
                                         //alert("Show actors2 " + patientId);
                                         $.ajax({
                                             type: "GET",
@@ -199,8 +143,8 @@
                                                 $('#Detail2').html('<h3>Error in retrieval of Details (Add note)</h3>');
                                             }
                                         });
-                                    }
-                                    function showPatientDetails3(patientId) {
+                                    }*@
+                                    @*function showPatientDetails3(patientId) {
                                         //alert("Show actors2 " + patientId);
                                         $.ajax({
                                             type: "GET",
@@ -221,8 +165,8 @@
                                                 $('#Detail2').html('<h3>Error in retrieval of Details (Welcome)</h3>');
                                             }
                                         });
-                                    }
-                                    function showPatientDetails4(patientId) {
+                                    }*@
+                                    @*function showPatientDetails4(patientId) {
                                         //alert("Patient ID " + patientId);
                                         $.ajax({
                                             type: "GET",
@@ -245,6 +189,6 @@
                                                 $('#Detail2').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
                                             }
                                         });
-                                    }
+                                    }*@
     </script>
 }
