@@ -204,6 +204,40 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion
 
+        #region Add Task
+        public IActionResult AddTask(int? id)
+        {
+            ViewBag.PatientID = id;
+            return PartialView("_AddATask");
+            //return View();
+        }
+        [HttpPost]
+        public IActionResult AddTask(PatientDetailsViewModel student, int id)
+        {
+            ViewBag.PatientID = id;
+
+
+            if (ModelState.IsValid)
+            {
+                Notes_Table newStudent = new Notes_Table()
+                {
+                    NoteTitle = student.vmNoteTable.NoteTitle,
+                    NoteDate = DateTime.Now,
+                    Details = student.vmNoteTable.Details,
+                    PPS_No = ViewBag.PatientID
+                };
+                var c = newStudent;
+                _context.notes.Add(newStudent);
+                _context.SaveChanges();
+                ModelState.Clear();
+                ViewBag.Message = "Note was successfuly added. ";
+                //ViewBag.Message =  "Note for " +x.vmPatientTable.Name + " were successfuly added. ";
+            }
+            //return View();
+            //return PartialView("_AddNote");
+            return RedirectToAction("Welcome");
+        }
+        #endregion
         #region Create A New Student GET
         public IActionResult CreateStudentRecord()
         {

@@ -102,13 +102,15 @@
         <div class="w3-container  w3-cell w3-cell-middle" style="float:right; color:#2196F3">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPatientDetails3('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Tasks</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <span onclick="showPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span onclick="viewNotes('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <span onclick="showPatientDetails2('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span onclick="addNote('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <span onclick="showPatientDetails4('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
+            <span onclick="addTask('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <span onclick="showPatientDetails4('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>
+            <span onclick="reassignPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
+
+            
 
             @*@Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })*@
 
@@ -117,42 +119,44 @@
 
 </div>
 
-<div id="Detail2"></div> @*AddNote*@
-<div id="Detail3"></div>@*ReassignPatient*@
-<div id="Detail"></div> @*View Notes*@
+<div id="AddNoteDetail"></div> @*AddNote*@
+<div id="ReassignPatientDetail"></div>@*ReassignPatient*@
+<div id="NoteDetail"></div> @*View Notes*@
+<div id="TaskDetail"></div> @*Add Task*@
 
 @*</div>*@@*Container*@
 
 @section scripts
 {
     <script>
-        function showPatient(patientId) {
+
+        /**********view Patient Notes**********/
+        function viewNotes(patientId) {
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotes")',
                 data: { id: patientId },
                 success: function (data) {
-                    $('#Detail').hide();
-                    $('#Detail2').hide();
+                    $('#NoteDetail').hide();
+                    $('#AddNoteDetail').hide();
                     $('#Detail1').hide();
-                    $('#Detail3').hide();
-                    $('#Detail').html(data);
-                    $('#Detail').fadeIn("slow");
+                    $('#TaskDetail').hide();
+                    $('#ReassignPatientDetail').hide();
+                    $('#NoteDetail').html(data);
+                    $('#NoteDetail').fadeIn("slow");
                 },
                 error: function (data) {
-                    $('#Detail').html('<h3>Error in retrieval</h3>');
+                    $('#NoteDetail').html('<h3>Error in retrieval</h3>');
                 }
             });
         }
         function showPatientDetails(patientId, dateId) {
-
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("PatientNotesDetails")',
                 data: { pd: patientId, dt: dateId },
                 success: function (data) {
-                    $('#Detail').hde();
-
+                    $('#NoteDetail').hde();
                     $('#Detail1').html(data);
                     $('#Detail1').fadeIn("slow");
                 },
@@ -163,25 +167,44 @@
                 }
             });
         }
-        function showPatientDetails2(patientId) {
-            //alert("Show actors2 " + patientId);
+        /**********Add A Note**********/
+        function addNote(patientId) {
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("AddNote")',
                 data: { id: patientId },
                 success: function (data) {
-                    $('#Detail').hide();
+                    $('#NoteDetail').hide();
                     $('#Detail1').hide();
-                    $('#Detail3').hide();
-                    //alert("Show actors2 ");
-                    $('#Detail2').html(data);
-                    $('#Detail2').fadeIn("slow");
+                    $('#ReassignPatientDetail').hide();
+                    $('#TaskDetail').hide();
+                    $('#AddNoteDetail').html(data);
+                    $('#AddNoteDetail').fadeIn("slow");
                 },
                 error: function (data) {
-                    alert("Show actors2 error ");
-                    $('#Detail2').fadeIn("slow");
-                    alert("Error");
-                    $('#Detail2').html('<h3>Error in retrieval of Details (Add note)</h3>');
+                    $('#AddNoteDetail').fadeIn("slow");
+                    $('#AddNoteDetail').html('<h3>Error in retrieval of Details (Add note)</h3>');
+                }
+            });
+        }
+        /**********Add A Task**********/
+        function addTask(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("AddTask")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#Detail1').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#ReassignPatientDetail').hide();
+                    $('#TaskDetail').hide();                   
+                    $('#TaskDetail').html(data);
+                    $('#TaskDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    $('#TaskDetail').fadeIn("slow");
+                    $('#TaskDetail').html('<h3>Error in retrieval of Details (Add note)</h3>');
                 }
             });
         }
@@ -200,34 +223,31 @@
                     //$('#Detail2').fadeIn("slow");
                 },
                 error: function (data) {
-                    alert("Show actors2 error ");
-                    $('#Detail2').fadeIn("slow");
+                    alert("Show actors2 (showPatientDetails3) error ");
+                    $('#AddNoteDetail').fadeIn("slow");
                     alert("Error");
-                    $('#Detail2').html('<h3>Error in retrieval of Details (Welcome)</h3>');
+                    $('#AddNoteDetail').html('<h3>Error in retrieval of Details (Welcome)</h3>');
                 }
             });
         }
-        function showPatientDetails4(patientId) {
-            //alert("Patient ID " + patientId);
+        /**********Reassign Patient**********/
+        function reassignPatient(patientId) {
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("ReassignPatient")',
                 data: { id: patientId },
                 success: function (data) {
-                    //window.location = 'ReassignPatient';
-                    //alert("Show student 2 ");
-                    $('#Detail').hide();
-                    $('#Detail2').hide();
+                    $('#NoteDetail').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#TaskDetail').hide();
                     $('#Detail1').hide();
-                    //alert("Show student 1 ");
-                    $('#Detail3').html(data);
-                    $('#Detail3').fadeIn("slow");
+                    $('#ReassignPatientDetail').html(data);
+                    $('#ReassignPatientDetail').fadeIn("slow");
                 },
                 error: function (data) {
                     alert("Error ");
-                    $('#Detail2').fadeIn("slow");
-                    //alert("Error");
-                    $('#Detail2').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                    $('#ReassignPatientDetail').fadeIn("slow");
+                    $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
                 }
             });
         }

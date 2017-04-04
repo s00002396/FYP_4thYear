@@ -15,27 +15,28 @@
                         </div>
                     </div>
                 }
-                <div style="text-align:center;color:#337AB7; float:left; font-size:20px; margin-right:0px; margin-left:55px">New Note <i class="glyphicon glyphicon-paperclip" style="color:#337AB7"></i> </div>
+                <div style="text-align:center;color:#337AB7; float:left; font-size:20px; margin-right:0px; margin-left:55px">Add a task <i class="glyphicon glyphicon-plus" style="color:#337AB7"></i> </div>
                 @*<hr />*@
 
                 <div class="form-group" style="width:500px !important; float:left; margin-bottom:15px">
-                    <div class="col-md-offset-2 col-md-8" style="width:500px !important">
-                        <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Title" class="form-control" style="width:500px !important" />
+                    <div class="col-md-offset-2 col-md-10" style="width:500px !important">
+                        <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Task Type" class="form-control" style="width:490px !important" />
+                        <span asp-validation-for="@Model.vmNoteTable.NoteTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group" style="width:500px !important; float:left; margin-bottom:15px">
+                    <div class="col-md-offset-6 col-md-6" style="width:500px !important">
+                        <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Due Date" class="form-control" style="width:500px !important" />
                         <span asp-validation-for="@Model.vmNoteTable.NoteTitle" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group" style="width:800px !important;">
                     <div class="col-md-offset-2 col-md-8" style="float:left; padding-left:132px">
-                        <textarea asp-for="@Model.vmNoteTable.Details" style="height:100px;width:500px" placeholder="Note Details" class="form-control"></textarea>
+                        <textarea asp-for="@Model.vmNoteTable.Details" style="height:100px;width:500px" placeholder="Short Description" class="form-control"></textarea>
                         <span asp-validation-for="@Model.vmNoteTable.Details" class="text-danger"></span>
                         <input type="submit" class="btn btn-sm btn-primary btn-signin" style="margin-left:20px; float:right" value="Add" />
                     </div>
                 </div>
-                @*<div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                        <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Add" />
-                    </div>
-                </div>*@ 
             </div>
         }@*end Using*@
     </div>
