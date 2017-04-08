@@ -1,5 +1,5 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
-<div class="container" style="background-color:#FfFfFf; height:500px">
+<div class="container" style="background-color:#FfFfFf; height:600px">
     <div class="w3-container">
         <h2 class="glyphicon glyphicon-user" style="color:#2196F3"><span>&nbsp;Patient Details</span></h2>
     </div>
@@ -80,7 +80,6 @@
                     @item.vmPatientTable.CloseDate.ToString()
                 </div>
                 <br />
-
             }
         }
         else
@@ -94,16 +93,17 @@
         @foreach (var item in Model)
         {
             <div class="w3-container  w3-cell w3-cell-middle" style="float:right; color:#2196F3">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="backToTasks('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Tasks</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="backToHome('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-home"></i> &nbsp;Home</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span onclick="backToTasks('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Patient List</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <span onclick="viewNotes('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span onclick="viewNotes('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <span onclick="addNote('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span onclick="addNote('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <span onclick="addTask('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span onclick="addTask('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <span onclick="reassignPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
-            </div>
+                    <span onclick="reassignPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
+                </div>
         }
 
     </div>
@@ -175,18 +175,33 @@
                 },
                 error: function (data) {
                     $('#TaskDetail').fadeIn("slow");
-                    $('#TaskDetail').html('<h3>Error in retrieval of Details (Add note)</h3>');
+                    $('#TaskDetail').html('<h3>Error in retrieval of Details (Add Task)</h3>');
                 }
             });
         }
-        /*********Back To Tasks**************/
-        function backToTasks(patientId) {
+        /*********Back To Home**************/
+        function backToHome(patientId) {
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("Welcome")',
                 data: { id: patientId },
                 success: function (data) {
                     window.location = '/Home/Welcome';
+                },
+                error: function (data) {
+                    $('#Error').fadeIn("slow");
+                    $('#Error').html('<h3>Error in retrieval of Details (backToTasks)</h3>');
+                }
+            });
+        }
+        /*********Back To Patients**************/
+        function backToTasks(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ViewAllPatients")',
+                data: { id: patientId },
+                success: function (data) {
+                    window.location = '/Home/ViewAllPatients';
                 },
                 error: function (data) {
                     $('#Error').fadeIn("slow");

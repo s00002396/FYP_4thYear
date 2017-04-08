@@ -83,12 +83,15 @@ namespace RegistrationMVCCore.Model
     }
     public class Task_Patient_OT_Table
     {
-        //[Key, Column(Order = 0)]
+        [Key, Column(Order = 0)]
         public int TaskID { get; set; }
-        //[Key, Column(Order = 1)]
+        [Key, Column(Order = 1)]
         public int PPS_No { get; set; }
-        
+        [Key, Column(Order = 2)]
         public int OccID { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime DueDate { get; set; }
+        public bool Completed { get; set; }
     }
     public class Task_Table
     {
@@ -118,6 +121,7 @@ namespace RegistrationMVCCore.Model
         public UserAccount vmUserAcc { get; set; }
         public Notes_Table vmNoteTable { get; set; }
         public Task_Patient_OT_Table vmTPOT { get; set; }
+        public Task_Table vmTaskTable { get; set; }
     }
     
 }

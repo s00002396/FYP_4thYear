@@ -6,7 +6,81 @@
 
 @ViewBag.id
 @*<h2>Add new patient records.</h2>*@
-<div class="row">
+<div class="w3-card-4" style="width:850px;background-color:#FFFFFF; height:450px; margin-left:100px; margin-top:50px">
+    <header class="w3-container w3-blue">
+        <h4>Add a new patient &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
+    </header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="w3-container" style="margin:20px; height:225px;width:370px; float:left">
+        @*<ul style="list-style:none">*@
+            <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
+                @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
+                    <input asp-for="@Model.vmPatientTable.Name" placeholder="Full Name" class="form-control" />
+                    <span asp-validation-for="@Model.vmPatientTable.Name" class="text-danger"></span>
+                @*</li>*@
+            </div>
+            <div class="form-group" style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">
+                @*<li style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">*@
+                    <input asp-for="@Model.vmPatientTable.City" placeholder="City" class="form-control" />
+                    <span asp-validation-for="@Model.vmPatientTable.City" class="text-danger"></span>
+                @*</li>*@
+            </div>
+            <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
+                @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
+                    <input asp-for="@Model.vmGuardian.Name" placeholder="Guardian Name" class="form-control" />
+                    <span asp-validation-for="@Model.vmGuardian.Name" class="text-danger"></span>
+                @*</li>*@
+                </div>
+                <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
+                @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.vmPatientTable.SchoolID, ViewBag.schoolList as SelectList, "--School Name--", new { @class = "form-control" })
+                @*</li>*@
+                </div>
+        <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:33px">
+            @Html.ActionLink("Cancel", "Welcome", new { id = 2 }, new { @class = "btn btn-lg btn-primary btn-block btn-signin", @style = "margin-top:0px" })
+        </div>
+            @*</ul>*@
+
+        </div>
+    <div class="w3-container" style="margin:20px;height:225px;width:370px;float:left ">
+        @*<ul style="list-style:none">*@
+<div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
+            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+                <input asp-for="@Model.vmPatientTable.AddressLineOne" placeholder="Address Line 1" class="form-control" />
+                <span asp-validation-for="@Model.vmPatientTable.AddressLineOne" class="text-danger"></span>
+            @*</li>*@
+    </div>
+    <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:10px ">
+            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:10px ">*@
+                <input asp-for="@Model.vmPatientTable.County" placeholder="County" class="form-control" />
+                <span asp-validation-for="@Model.vmPatientTable.County" class="text-danger"></span>
+            @*</li>*@
+     </div>
+    <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
+            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+                <input asp-for="@Model.vmGuardian.PhoneNo" placeholder="Guardian Number" class="form-control" />
+                <span asp-validation-for="@Model.vmGuardian.PhoneNo" class="text-danger"></span>
+            @*</li>*@
+     </div>
+    <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
+            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.vmPatientTable.OccID, ViewBag.OTList as SelectList, "--OT Name--", new { @class = "form-control" })
+            @*</li>*@
+             </div>
+            <div class="form-group"style="padding:5px 0; margin-bottom:20px; margin-top:33px">
+                <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Create" />
+            @*<li style="padding:5px 0"><input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Create" /></li>*@
+             </div>
+        @*</ul>*@
+    </div>
+}
+</div>
+
+@*<div class="row">
     <div class="col-md-4" style="background-color:#F7F7F7; border-radius:6px; margin-left:380px; padding: 20px 25px 30px;">
         @using (Html.BeginForm())
         {
@@ -22,14 +96,8 @@
                     </div>
                 }
                 <h4 style="text-align:center">Student Details.</h4>
-                <hr />               
-
-                @*<div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                            <input asp-for="PPS_No" placeholder="PPS Number" class="form-control" />
-                            <span asp-validation-for="PPS_No" class="text-danger"></span>
-                        </div>
-                    </div>*@
+                <hr /> 
+              
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
                         <input asp-for="@Model.vmPatientTable.Name" placeholder="Full Name" class="form-control" />
@@ -91,10 +159,10 @@
                     </div>
                 </div>
             </div>
-        }@*end Using*@
+        }
     </div>
 </div>
 <div>
     <hr />
     @Html.ActionLink("Back to Tasks", "Welcome", new { id = 2 }, new { @class = "btn btn-info", @style = "margin-top:10px" })
-</div>
+</div>*@

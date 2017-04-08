@@ -1,0 +1,51 @@
+﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
+
+<div class="w3-cell-row" style="height:35px">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Therapist Name
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Username
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Email Address
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Employee No.
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Action
+    </div>
+</div>
+<div class="panel-body" style="height:383px">
+    <div class="right-inner-addon" style="width:569px">
+        @if (ViewBag.Message != null)
+        {
+            <div class="form-control">
+                <div class="col-md-12" style="color:blue">
+                    @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+                </div>
+            </div>
+        }
+        @if (Model.Any())
+        {
+            <table class="table table-condensed table-hover">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width:95px !important">@item.vmUserAcc.FirstName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>@item.vmUserAcc.UserName&nbsp;&nbsp;&nbsp;</td>
+                        <td>@item.vmUserAcc.Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>@item.vmUserAcc.UserID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                        <td>@Html.ActionLink("Reassign", "DeletePatient1", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
+    </div>
+</div>

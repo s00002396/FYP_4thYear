@@ -3,17 +3,20 @@
     <section style="width:900px; margin-left:0px">
         <section style="height:50px;width:590px;float:right;margin-left:30px ">
             <ul class="nav nav-tabs" style="background-color:white">
-                <li class="active test"><a data-toggle="tab" href="#home">All Patients</a></li>
+                <li class="active test"><a data-toggle="tab" href="#home">All Therapists</a></li>
             </ul>
             <div class="tab-content">
                 <div id="home1" class="tab-pane fade in active">
                     <div class="box" style="width:590px;">
                         <div class="w3-card-4" style="background-color:#FFFFFF">
-                            @Html.Partial("_DeleteList", Model)
+                            @Html.Partial("_DeleteOT", Model)
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </section>
+    <h5>Remove OT</h5>
+    <h6>*All patients must be reassigned first</h6>
 </div>
+

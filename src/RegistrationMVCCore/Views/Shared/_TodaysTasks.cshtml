@@ -1,6 +1,6 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.MyViewModel>
 
-<div class="panel-heading" style="font:bold; background-color:#2196F3; color:#F7FFFF"><strong>Patient Name&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
+<div class="panel-heading" style="font:bold; background-color:#2196F3; color:#F7FFFF"><strong>Patient Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
 <div class="panel-body" style="height:423px">
     <div class="right-inner-addon" style="width:170px;">
         @if (Model.Any())
@@ -8,12 +8,14 @@
             <table class="table table-condensed table-hover">
                 @foreach (var item in Model)
                 {
-                    @if (@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy") == @ViewBag.TodaysDate.ToString("dd/MM/yyyy"))
+                    @*@if (@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy") == @ViewBag.TodaysDate.ToString("dd/MM/yyyy"))*@
+                    @if (@item.vmTPOT.DueDate.ToString("dd/MM/yyyy") == @ViewBag.TodaysDate.ToString("dd/MM/yyyy"))
                     {
                         <tr>
                             <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td>@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            @*<td>@item.vmTaskTable.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>*@
+                            <td>@item.vmTPOT.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
                             @if (@item.vmTaskTable.Completed.ToString() == "False")
                             {
