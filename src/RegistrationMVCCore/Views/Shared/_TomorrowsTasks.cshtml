@@ -1,6 +1,6 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.MyViewModel>
 
-<div class="panel-heading" style="font:bold;background-color:#2196F3; color:#F7FFFF"><strong>Patient Name&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
+<div class="panel-heading" style="font:bold; background-color:#2196F3; color:#F7FFFF"><strong>Patient Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed&nbsp;&nbsp;Task Details</strong></div>
 <div class="panel-body" style="height:423px">
     <div class="right-inner-addon" style="width:170px;">
         @if (ViewBag.Flag1 != "False")
@@ -17,13 +17,13 @@
 
                             @if (@item.vmTPOT.Completed.ToString() == "False")
                             {
-                                <td style="color:red">No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                             }
                             else
                             {
-                              <td style="color:green">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                              <td style="color:green">&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                             }
-                            <td>@Html.ActionLink("TaskDetails", "TaskDetails", new { id = item.vmPatientTable.PPS_No, id2 = item.vmTaskTable.TaskID, duedate = item.vmTPOT.DueDate }, new { @class = "btn btn-info btn-xs" })</td>
+                            <td style="min-width:50px; padding-left:30px">@Html.ActionLink(" ", "TaskDetails", new { id = item.vmPatientTable.PPS_No, id2 = item.vmTaskTable.TaskID, duedate = item.vmTPOT.DueDate }, new { @class = "btn btn-info btn-xs glyphicon glyphicon-info-sign" })</td>
                          </tr>
                         }
                 </table>

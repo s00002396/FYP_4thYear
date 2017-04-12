@@ -1,17 +1,14 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
 <div class="container" style="background-color:#F4F4F5; height:400px; padding:50px 100px">
-
-        <div class="w3-card-4" style="width:750px;background-color:#FFFFFF; height:200px; margin-left:100px; margin-top:10px">
+    
+        <div id="AddNoteDetail" class="w3-card-4" style="width:750px;background-color:#FFFFFF; height:200px; margin-left:100px; margin-top:10px">
             <header class="w3-container w3-blue">
                 <h4>Task Details &nbsp;<i class="glyphicon glyphicon-tasks"></i></h4>
             </header>
-            @*@using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()*@
 
-            <div class="w3-container" style="margin:20px; height:195px;width:700px; float:left">
+            <div  class="w3-container" style="margin:20px; height:195px;width:700px; float:left">
 
-                <div class="w3-cell-row" style="height:50px; margin-bottom:25px">
+                <div class="w3-cell-row" style="height:50px; margin-bottom:15px">
                     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px ">
                         Patient Name
                     </div>
@@ -24,7 +21,7 @@
                     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:140px ">
                         Completed
                     </div>
-                    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:140px ">
+                    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:140px;padding-left:35px ">
                         Action
                     </div>
                 </div>
@@ -33,10 +30,10 @@
             {
                     @foreach (var item in Model)
                 {
-                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:180px; width:210px;text-align:center;padding-left:0px">
+                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:150px; width:200px;text-align:center;padding-left:0px">
                             @item.vmPatientTable.Name
                         </div>
-                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center;">
+                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:140px;text-align:center;">
                             @item.vmTaskTable.TaskType
                         </div>
                         <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center">
@@ -48,13 +45,13 @@
                         @if (@item.vmTPOT.Completed == true)
                         {
                             <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
-                                <span onclick=""><i style="margin-left:10px;cursor:pointer;" class="btn btn-sm btn-success disabled">Complete</i></span>
+                                <span onclick=""><i style="margin-left:10px;cursor:pointer;" class="btn btn-sm btn-danger glyphicon glyphicon-ban-circle disabled"></i></span>
                             </div>
                         }
                         else
                         {
                             <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
-                                <span onclick="completeTask('@item.vmPatientTable.PPS_No','@item.vmTPOT.OTTaskID')"><i style="margin-left:10px;cursor:pointer;" class="btn btn-sm btn-success">Complete</i></span>
+                                <span onclick="completeTask('@item.vmPatientTable.PPS_No','@item.vmTPOT.OTTaskID')"><i style="margin-left:10px;cursor:pointer;" class="btn btn-sm btn-success glyphicon glyphicon-ok-sign"></i></span>
                             </div>
                         }
                         <br />
@@ -62,39 +59,11 @@
                 }
             </div>
         </div>
-
-    @*</div>*@
-    <div id="Error"></div>
-    <div id="AddNoteDetail"></div> @*AddNote*@
-    <div id="ReassignPatientDetail"></div>@*ReassignPatient*@
-    <div id="NoteDetail"></div> @*View Notes*@
-    <div id="TaskDetail"></div> @*Add Task*@
 </div>
-@*</div>*@@*Container*@
 
 @section scripts
 {
     <script>
-        /**********view Patient Notes**********/
-        function viewNotes(patientId) {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("PatientNotes")',
-                data: { id: patientId },
-                success: function (data) {
-                    $('#NoteDetail').hide();
-                    $('#AddNoteDetail').hide();
-                    $('#Detail1').hide();
-                    $('#TaskDetail').hide();
-                    $('#ReassignPatientDetail').hide();
-                    $('#NoteDetail').html(data);
-                    $('#NoteDetail').fadeIn("slow");
-                },
-                error: function (data) {
-                    $('#NoteDetail').html('<h3>Error in retrieval</h3>');
-                }
-            });
-        }
         /**********Complete a Task**********/
         function completeTask(patientId, taskId) {
             //alert("Patient ID " + patientId);
@@ -102,92 +71,23 @@
             $.ajax({
                 type: "Post",
                 url: '@Url.Action("CompleteTask")',
-                data: { id: patientId, pid:taskId },
+                data: { id: patientId, pid: taskId },
                 success: function (data) {
-                    $('#NoteDetail').hide();
-                    $('#Detail1').hide();
-                    $('#ReassignPatientDetail').hide();
-                    $('#TaskDetail').hide();
-                    $('#AddNoteDetail').html(data);
-                    $('#AddNoteDetail').fadeIn("slow");
+                    window.location = '/Home/Welcome';
+                    //window.location = '/Home/Welcome';
+                //success: function (data){
+                    //$('#AddNoteDetail').hide();
+                    //$('#Detail1').hide();
+                    //$('#ReassignPatientDetail').hide();
+                    //$('#TaskDetail').hide();
+                    //$('#AddNoteDetail').html(data);
+                    //$('#AddNoteDetail').fadeIn("slow");
                 },
                 error: function (data) {
                     $('#AddNoteDetail').fadeIn("slow");
                     $('#AddNoteDetail').html('<h3>Error in retrieval of Details (CompleteTask)</h3>');
                 }
             });
-        }
-        /**********Add A Task**********/
-        function addTask(patientId) {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("AddTask")',
-                data: { id: patientId },
-                success: function (data) {
-                    $('#NoteDetail').hide();
-                    $('#Detail1').hide();
-                    $('#AddNoteDetail').hide();
-                    $('#ReassignPatientDetail').hide();
-                    $('#TaskDetail').hide();
-                    $('#TaskDetail').html(data);
-                    $('#TaskDetail').fadeIn("slow");
-                },
-                error: function (data) {
-                    $('#TaskDetail').fadeIn("slow");
-                    $('#TaskDetail').html('<h3>Error in retrieval of Details (Add Task)</h3>');
-                }
-            });
-        }
-        /*********Back To Home**************/
-        function backToHome(patientId) {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("Welcome")',
-                data: { id: patientId },
-                success: function (data) {
-                    window.location = '/Home/Welcome';
-                },
-                error: function (data) {
-                    $('#Error').fadeIn("slow");
-                    $('#Error').html('<h3>Error in retrieval of Details (backToTasks)</h3>');
-                }
-            });
-        }
-        /*********Back To Patients**************/
-        function backToTasks(patientId) {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("ViewAllPatients")',
-                data: { id: patientId },
-                success: function (data) {
-                    window.location = '/Home/ViewAllPatients';
-                },
-                error: function (data) {
-                    $('#Error').fadeIn("slow");
-                    $('#Error').html('<h3>Error in retrieval of Details (backToTasks)</h3>');
-                }
-            });
-        }
-        /**********Reassign Patient**********/
-        function reassignPatient(patientId) {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("ReassignPatient")',
-                data: { id: patientId },
-                success: function (data) {
-                    $('#NoteDetail').hide();
-                    $('#AddNoteDetail').hide();
-                    $('#TaskDetail').hide();
-                    $('#Detail1').hide();
-                    $('#ReassignPatientDetail').html(data);
-                    $('#ReassignPatientDetail').fadeIn("slow");
-                },
-                error: function (data) {
-                    alert("Error ");
-                    $('#ReassignPatientDetail').fadeIn("slow");
-                    $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
-                }
-            });
-        }
+        }        
     </script>
 }

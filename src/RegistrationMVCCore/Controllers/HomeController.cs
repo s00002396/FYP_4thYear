@@ -227,6 +227,7 @@ namespace RegistrationMVCCore.Controllers
         #region Task Details
         public ActionResult TaskDetails(int? id, int? id2, DateTime duedate)
         {
+            var tester = 7;
             var taskDetails = (from tS in _context.otTasks
                                   join tT in _context.tasks on tS.TaskID equals tT.TaskID
                                   join pA in _context.patientAccount on tS.PPS_No equals pA.PPS_No
@@ -297,7 +298,8 @@ namespace RegistrationMVCCore.Controllers
             }
             //return View();
             //return PartialView("_AddNote");
-            return RedirectToAction("Welcome");
+            //return RedirectToAction("Welcome");
+            return RedirectToAction("Details", new {id = id });
         }
         #endregion
 
@@ -344,7 +346,8 @@ namespace RegistrationMVCCore.Controllers
                 ViewBag.Message = "Note was successfuly added. ";
             }
             //return PartialView("_AddNote");
-            return RedirectToAction("Welcome");
+            //return RedirectToAction("Welcome");
+            return RedirectToAction("Details", new { id = id });
         }
         #endregion
 
@@ -362,9 +365,11 @@ namespace RegistrationMVCCore.Controllers
                 otp.Completed = true;
                 _context.otTasks.Update(otp);
                 _context.SaveChanges();
-                ViewBag.Message = "Note was successfuly added. ";
+                ViewBag.Message = "Updated. ";
+                ModelState.Clear();
             }
             //return PartialView("_AddNote");
+            //return RedirectToAction("TaskDetails",new { id = otp.PPS_No, id2 = otp.TaskID, duedate = otp.DueDate });
             return RedirectToAction("Welcome");
         }
         #endregion
@@ -484,15 +489,8 @@ namespace RegistrationMVCCore.Controllers
                               }).ToList();
             var test = myNewTasks;
             if (ModelState.IsValid)
-            {
-                //_context.otTasks.Where(pp => pp.PPS_No == id).ToList().ForEach(_context.otTasks();
-                //foreach (var item in res)
-                //{
-                //    res.FirstOrDefault().OccID = student.vmTPOT.OccID;
-                //}
-                //otp.OccID = student.vmPatientTable.OccID;            
+            {           
                 patient.OccID = student.vmPatientTable.OccID;
-                //_context.otTasks.Update(otp);
                 _context.patientAccount.Update((patient));
                 _context.SaveChanges();
             }

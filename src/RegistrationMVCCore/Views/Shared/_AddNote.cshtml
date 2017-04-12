@@ -9,59 +9,17 @@
     @Html.AntiForgeryToken()
 
     <div class="w3-container" style="margin:20px; height:225px;width:350px; float:left">
-        @*<ul style="list-style:none">*@
             <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
                 <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Title" class="form-control" style="width:500px !important" />
                 <span asp-validation-for="@Model.vmNoteTable.NoteTitle" class="text-danger"></span>
             </div>
-
             <div class="form-group" style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">
                 <textarea asp-for="@Model.vmNoteTable.Details" style="height:100px;width:500px" placeholder="Note Details" class="form-control"></textarea>
                 <span asp-validation-for="@Model.vmNoteTable.Details" class="text-danger"></span>
             </div>
-        @*</ul>*@
     </div>
-    <div class="w3-container" style="margin:20px;height:225px;width:350px;float:left ">
-        @*<ul style="list-style:none">*@          
-
+    <div class="w3-container" style="margin:20px;height:225px;width:350px;float:left "> 
             <div class="form-group" style="padding:5px 0;margin-bottom:0px; margin-top:150px"><input type="submit" class="btn btn-sm btn-primary btn-signin" style="margin-left:20px; float:right" value="Add" /></div>
-        @*</ul>*@
     </div>
 }
 </div>
-
-@*<div class="row">
-    <div class="col-lg-10 col-md-10" style="background-color:#F7F7F7; border-radius:6px; margin-left:80px; padding: 20px 25px 30px;">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div style="width:800px !important">
-                @if (ViewBag.Message != null)
-                {
-                    <div class="form-control">
-                        <div class="col-md-12" style="color:blue">
-                            @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
-                        </div>
-                    </div>
-                }
-                <div style="text-align:center;color:#337AB7; float:left; font-size:20px; margin-right:0px; margin-left:55px">New Note <i class="glyphicon glyphicon-paperclip" style="color:#337AB7"></i> </div>
-                
-
-                <div class="form-group" style="width:500px !important; float:left; margin-bottom:15px">
-                    <div class="col-md-offset-2 col-md-8" style="width:500px !important">
-                        <input asp-for="@Model.vmNoteTable.NoteTitle" placeholder="Title" class="form-control" style="width:500px !important" />
-                        <span asp-validation-for="@Model.vmNoteTable.NoteTitle" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group" style="width:800px !important;">
-                    <div class="col-md-offset-2 col-md-8" style="float:left; padding-left:132px">
-                        <textarea asp-for="@Model.vmNoteTable.Details" style="height:100px;width:500px" placeholder="Note Details" class="form-control"></textarea>
-                        <span asp-validation-for="@Model.vmNoteTable.Details" class="text-danger"></span>
-                        <input type="submit" class="btn btn-sm btn-primary btn-signin" style="margin-left:20px; float:right" value="Add" />
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>*@
