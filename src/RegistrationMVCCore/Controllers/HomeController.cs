@@ -546,7 +546,30 @@ namespace RegistrationMVCCore.Controllers
             //return View();
         }
         #endregion
+        #region Get Patients for specific therapist
+        public ActionResult Therapist_Patient_Details(int? id)
+        {
+            var patientDetails = (from pA in _context.patientAccount
+                                  join g in _context.guardians on pA.GuardianID equals g.GuardianID
+                                  //join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                                  join uA in _context.userAccount on pA.OccID equals uA.UserID
+                                  //join nO in _context.notes on pA.PPS_No equals nO.PPS_No
+                                  where pA.OccID.Equals(id)
+                                  select new PatientDetailsViewModel
+                                  {
+                                      vmPatientTable = pA,
+                                      vmGuardian = g,
+                                      //vmSchools = s,
+                                      vmUserAcc = uA//,
+                                      //vmNoteTable = nO
+                                  }).ToList();
 
+
+            ViewBag.noteList = patientDetails;
+
+            return View(patientDetails);
+        }
+        #endregion
         #region Delete Patient
         public IActionResult DeletePatient(int? id)
         {
