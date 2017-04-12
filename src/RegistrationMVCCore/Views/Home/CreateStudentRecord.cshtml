@@ -5,8 +5,8 @@
 }
 
 @ViewBag.id
-@*<h2>Add new patient records.</h2>*@
-<div class="w3-card-4" style="width:850px;background-color:#FFFFFF; height:450px; margin-left:100px; margin-top:50px">
+
+<div class="w3-card-4" style="width:850px;background-color:#FFFFFF; height:520px; margin-left:100px; margin-top:50px">
     <header class="w3-container w3-blue">
         <h4>Add a new patient &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
     </header>
@@ -14,30 +14,36 @@
 {
     @Html.AntiForgeryToken()
     <div class="w3-container" style="margin:20px; height:225px;width:370px; float:left">
-        @*<ul style="list-style:none">*@
+        <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
+
+            <input asp-for="@Model.vmPatientTable.Social_Security_No" placeholder="Social Security Number" class="form-control" />
+            <span asp-validation-for="@Model.vmPatientTable.Social_Security_No" class="text-danger"></span>
+
+        </div>
+       
             <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
-                @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
+               
                     <input asp-for="@Model.vmPatientTable.Name" placeholder="Full Name" class="form-control" />
                     <span asp-validation-for="@Model.vmPatientTable.Name" class="text-danger"></span>
-                @*</li>*@
+               
             </div>
             <div class="form-group" style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">
-                @*<li style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">*@
+                
                     <input asp-for="@Model.vmPatientTable.City" placeholder="City" class="form-control" />
                     <span asp-validation-for="@Model.vmPatientTable.City" class="text-danger"></span>
-                @*</li>*@
+                
             </div>
             <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
-                @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
+               
                     <input asp-for="@Model.vmGuardian.Name" placeholder="Guardian Name" class="form-control" />
                     <span asp-validation-for="@Model.vmGuardian.Name" class="text-danger"></span>
-                @*</li>*@
+               
                 </div>
                 <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
-                @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
+               
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.DropDownListFor(model => model.vmPatientTable.SchoolID, ViewBag.schoolList as SelectList, "--School Name--", new { @class = "form-control" })
-                @*</li>*@
+               
                 </div>
         <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:33px">
             @Html.ActionLink("Cancel", "Welcome", new { id = 2 }, new { @class = "btn btn-lg btn-primary btn-block btn-signin", @style = "margin-top:0px" })
@@ -46,36 +52,42 @@
 
         </div>
     <div class="w3-container" style="margin:20px;height:225px;width:370px;float:left ">
-        @*<ul style="list-style:none">*@
+        <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
+
+            <input asp-for="@Model.vmPatientTable.DoB" placeholder="Date of Birth" class="form-control" />
+            <span asp-validation-for="@Model.vmPatientTable.DoB" class="text-danger"></span>
+
+        </div>
+        
 <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+            
                 <input asp-for="@Model.vmPatientTable.AddressLineOne" placeholder="Address Line 1" class="form-control" />
                 <span asp-validation-for="@Model.vmPatientTable.AddressLineOne" class="text-danger"></span>
-            @*</li>*@
+            
     </div>
     <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:10px ">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:10px ">*@
+            
                 <input asp-for="@Model.vmPatientTable.County" placeholder="County" class="form-control" />
                 <span asp-validation-for="@Model.vmPatientTable.County" class="text-danger"></span>
-            @*</li>*@
+            
      </div>
     <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+            
                 <input asp-for="@Model.vmGuardian.PhoneNo" placeholder="Guardian Number" class="form-control" />
                 <span asp-validation-for="@Model.vmGuardian.PhoneNo" class="text-danger"></span>
-            @*</li>*@
+           
      </div>
     <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+          
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.DropDownListFor(model => model.vmPatientTable.OccID, ViewBag.OTList as SelectList, "--OT Name--", new { @class = "form-control" })
-            @*</li>*@
+           
              </div>
             <div class="form-group"style="padding:5px 0; margin-bottom:20px; margin-top:33px">
                 <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Create" />
-            @*<li style="padding:5px 0"><input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Create" /></li>*@
+          
              </div>
-        @*</ul>*@
+        
     </div>
 }
 </div>

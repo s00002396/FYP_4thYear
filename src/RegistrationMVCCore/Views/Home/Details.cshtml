@@ -9,15 +9,15 @@
             Assigned To
         </div>
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-            PPS No
+            Social Security
         </div>
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
             Student Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px ">
             Address Line1
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:100px ">
             City
         </div>
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
@@ -45,19 +45,19 @@
         {
             @foreach (var item in Model)
             {
-                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:108px;text-align:center">
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:100px;text-align:center">
                     @item.vmUserAcc.FirstName
                 </div>
-                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:80px;text-align:center;">
-                    @item.vmPatientTable.PPS_No
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center;">
+                    @item.vmPatientTable.Social_Security_No
                 </div>
-                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:90px;text-align:center">
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center">
                     @item.vmPatientTable.Name
                 </div>
-                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;text-align:center">
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
                     @item.vmPatientTable.AddressLineOne
                 </div>
-                <div class="w3-container w3-cell w3-cell-middle" style="width:0px; text-align:center">
+                <div class="w3-container w3-cell w3-cell-middle" style="width:100px; text-align:left">
                     @item.vmPatientTable.City
                 </div>
                 <div class="w3-container w3-cell w3-cell-middle" style="width:0px;text-align:center">
@@ -70,10 +70,10 @@
                 <div class="w3-container w3-cell w3-cell-middle" style="min-width:60px;text-align:center">
                     @item.vmGuardian.PhoneNo
                 </div>
-                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;width:110px; text-align:center">
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:100px;width:110px;padding-right:40px; text-align:center;margin-right:10px;">
                     @item.vmSchools.SchoolName
                 </div>
-                <div class="w3-container w3-cell w3-cell-middle" style="width:30px;text-align:center">
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:30px;width:30px;padding-right:0px;text-align:center;  margin-right:100px;">
                     @item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")
                 </div>
                 <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;width:30px; text-align:center">

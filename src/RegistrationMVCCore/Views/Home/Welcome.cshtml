@@ -41,16 +41,19 @@
                 <div class="panel panel-default " style="border-radius:0px">
                     <div class="panel-heading" style="background-color:#2196F3;border-top-left-radius: 0px;
   border-top-right-radius: 0px; color:#F7FFFF;font-size:20px">Client Search&nbsp;<i class="glyphicon glyphicon-search"></i></div>
-                    <div class="w3-container" style="margin-top:10px; height:55px">
+                    <div class="w3-container" style="margin-top:10px; height:85px">
                         @using (@Html.BeginForm("Welcome", "Home", FormMethod.Get))
                         {
+                            <b><i>&nbsp;&nbsp;&nbsp;Search By</i>&nbsp;&nbsp;</b><br />@Html.RadioButton("searchBy", "Social_Security_No",true)<text>&nbsp;Social Security No&nbsp;&nbsp;</text>@Html.RadioButton("searchBy", "Name")<text>&nbsp;Name</text><br />
                             @Html.TextBox("search", "", new { placeholder = "Search by PPS No.", style = "border-radius:5px; float:left; width:170px; margin-right:3px", @class = "form-control" })<input class="w3-btn w3-light-blue w3-border"  type="submit" style="border-radius:5px;color:#FFFFFF !important" value="search" />
                         }
                     </div>
                 </div>
             </div>
 
-            @*****************Maintain Accounts****************************************@
+            @*****************Maintain Accounts****************************************@  
+        @if (ViewBag.Admin == "True")
+        {
             <div class="w3-card-4" style="width:300px;background-color:#FFFFFF">
                 <header class="w3-container w3-blue">
                     <h4>Maintain Accounts &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
@@ -67,13 +70,35 @@
                     </ul>
                 </div>
             </div>
+        }
+        else
+        {
+            <div class="w3-card-4" style="width:300px;background-color:#FFFFFF">
+                <header class="w3-container w3-blue">
+                    <h4>Maintain Accounts &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
+                </header>
+                <div class="w3-container" style="margin:20px; height:125px; ">
+                    <ul style="list-style:none">
+                        <li style="padding:5px 0 "><a asp-area="" asp-controller="Home" asp-action="ViewAllPatients"><i class="glyphicon glyphicon-user"></i>&nbsp;View All Patient</a></li>
+
+                        <li style="padding:5px 0 "><a asp-area="" asp-controller="Home" asp-action="CreateStudentRecord"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Patient</a></li>
+
+                        <li style="padding:5px 0"><a asp-area="" asp-controller="Home" asp-action="DeletePatient"><i class="glyphicon glyphicon-trash"></i>&nbsp;Remove Patient</a></li>                        
+                    </ul>
+                </div>
+            </div>
+
+
+        }
 
             @*****************Admin****************************************************@
+            @if (ViewBag.Admin == "True")
+            {
             <div class="w3-card-4" style="width:300px;background-color:#FFFFFF">
                 <header class="w3-container w3-blue">
                     <h4>Admin &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
                 </header>
-                <div class="w3-container" style="margin:20px; height:100px">
+                <div class="w3-container" style="margin:20px; height:71px">
                     <ul style="list-style:none">
                         <li style="padding:5px 0">
                             <a asp-area="" asp-controller="Home" asp-action="Register"><i class="glyphicon glyphicon-user"></i>&nbsp;Register a new OT</a>
@@ -84,6 +109,21 @@
                     </ul>
                 </div>
             </div>
+            }
+        else
+            {
+            <div class="w3-card-4" style="width:300px;background-color:#FFFFFF">
+                <header class="w3-container w3-blue">
+                    <h4>Logout &nbsp;<i class="glyphicon glyphicon-log-out"></i></h4>
+                </header>
+                <div class="w3-container" style="margin:20px; height:71px">
+                   <ul style="list-style:none">
+                       <li style="padding:5px 0"><a asp-area="" asp-controller="Home" asp-action="Logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout</a></li>                    
+                    </ul>
+                </div>
+            </div>
+        }
+
     </aside>
  </section>
 </div>

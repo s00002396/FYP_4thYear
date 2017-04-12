@@ -21,70 +21,142 @@ namespace RegistrationMVCCore.Controllers
         #endregion
 
         #region Welcome
-        public ActionResult Welcome(string search, int userID)
-        {
-            try
-            {            
-                var searchID = Convert.ToInt32(search);
-                ViewBag.UserName = HttpContext.Session.GetString("Username");
-
-
-                if (search != null)
-                {
+        public ActionResult Welcome(string searchBy, string search, int userID)
+        {           
+            ViewBag.UserName = HttpContext.Session.GetString("Username");
+            #region if (search != null)
+            if (search != null)
+            {
+                if (searchBy == "Social_Security_No")
+                { 
                     var patientDetails = (from pA in _context.patientAccount
                                           join g in _context.guardians on pA.GuardianID equals g.GuardianID
                                           join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
                                           join uA in _context.userAccount on pA.OccID equals uA.UserID
-                                          //join nO in _context.notes on pA.PPS_No equals nO.PPS_No
-                                          where pA.PPS_No.Equals(searchID)
+                                         
+                                          where pA.Social_Security_No.Equals(search) || search == null
                                           select new PatientDetailsViewModel
                                           {
                                               vmPatientTable = pA,
                                               vmGuardian = g,
                                               vmSchools = s,
-                                              vmUserAcc = uA//,
-                                                            //vmNoteTable = nO
+                                              vmUserAcc = uA                                             
                                           }).ToList();
-
+                    var ss = patientDetails;
                     return View("Details", patientDetails);
                 }
-                else if (HttpContext.Session.GetString("UserID") != null)
-                {
-                    //call up all records wit todays date..                
-                    DateTime today = DateTime.Today;
-                    ViewBag.TodaysDate = today;
-                    var occID = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
-
-                    var myNewTasks = (from t in _context.tasks
-                                      join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
-                                      join uA in _context.userAccount on otTask.OccID equals uA.UserID
-                                      join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                                      //where otTask.OccID.Equals(occID)
-                                      where otTask.OccID.Equals(occID)
-                                      //where t.DueDate.Date == today
-                                      select new MyViewModel
-                                      {
-                                          vmTaskTable = t,
-                                          vmUserAcc = uA,
-                                          vmTPOT = otTask,
-                                          vmPatientTable = pA
-                                      }).ToList();
-               
-                    return View(myNewTasks);
-                }
+                
                 else
                 {
-                    return RedirectToAction("Login");
+                    var patientDetails = (from pA in _context.patientAccount
+                                          join g in _context.guardians on pA.GuardianID equals g.GuardianID
+                                          join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
+                                          join uA in _context.userAccount on pA.OccID equals uA.UserID
+                                          
+                                          where pA.Name.StartsWith(search) || search == null
+                                          select new PatientDetailsViewModel
+                                          {
+                                              vmPatientTable = pA,
+                                              vmGuardian = g,
+                                              vmSchools = s,
+                                              vmUserAcc = uA
+                                          }).ToList();
+                    var ss = patientDetails;
+                    return View("Details", patientDetails);
                 }
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Welcome");
-            }
+            }//end if (search != null)
+            #endregion
+
+            #region else if (HttpContext.Session.GetString("UserID") != null)
+            else if (HttpContext.Session.GetString("UserID") != null)
+            {                           
+                DateTime today = DateTime.Today;
+                ViewBag.TodaysDate = today;
+                var occID = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+
+                var myNewTasks = (from t in _context.tasks
+                                  join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
+                                  join uA in _context.userAccount on otTask.OccID equals uA.UserID
+                                  join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
+                                 
+                                  where otTask.OccID.Equals(occID)
+                                
+                                  select new MyViewModel
+                                  {
+                                      vmTaskTable = t,
+                                      vmUserAcc = uA,
+                                      vmTPOT = otTask,
+                                      vmPatientTable = pA
+                                  }).ToList();
+                        try
+                        {
+                            if (myNewTasks.FirstOrDefault().vmUserAcc.IsAdmin == true)
+                            {
+                                ViewBag.Admin = "True";
+                                return View(myNewTasks);
+                            }
+                            else
+                            {
+                                ViewBag.Admin = "False";
+                                return View(myNewTasks);
+                            }
+
+                }
+                        catch (Exception)
+                        {
+                    var myNewTasks1 = (from uA in _context.userAccount
+                                      //join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
+                                      //join uA in _context.userAccount on otTask.OccID equals uA.UserID
+                                      //join pA in _context.patientAccount on uA.UserID equals pA.OccID
+                                      //where otTask.OccID.Equals(occID)
+                                      //where otTask.OccID.Equals(occID) || occID == null
+                                      where uA.UserID.Equals(occID)
+                                      select new MyViewModel
+                                      {
+                                          //vmTaskTable = t,
+                                          vmUserAcc = uA,
+                                          //vmTPOT = otTask,
+                                          //vmPatientTable = pA
+                                      }).ToList();
+                    if (myNewTasks1.FirstOrDefault().vmUserAcc.IsAdmin == true)
+                    {
+                        ViewBag.Admin = "True";
+                        ViewBag.Flag1 = "False";
+                        return View(myNewTasks1);
+                    }
+                    //var uu = myNewTasks1;
+                    //return View(myNewTasks);
+                    //return RedirectToAction("Welcome");
+                        }
+
+                //if (myNewTasks.FirstOrDefault().vmUserAcc.IsAdmin == true)
+                //{ 
+                //    ViewBag.Admin = "True";
+                //}
+                //return View(myNewTasks);
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Login");
+                //}
+                // }
+                //catch (Exception)
+                //{
+                //    return RedirectToAction("Welcome");
+                //}
+
+            } //end if (HttpContext.Session.GetString("UserID") != null)
+            #endregion
+
+            return RedirectToAction("Welcome");
         }
         #endregion
 
         #region Register
+        public ActionResult Register()
+        {           
+            return View();
+        }
         [HttpPost]
         public ActionResult Register(UserAccount user)
         {
@@ -148,6 +220,26 @@ namespace RegistrationMVCCore.Controllers
             ViewBag.noteList = patientDetails;
 
             return View(patientDetails);
+        }
+        #endregion
+
+
+        #region Task Details
+        public ActionResult TaskDetails(int? id, int? id2, DateTime duedate)
+        {
+            var taskDetails = (from tS in _context.otTasks
+                                  join tT in _context.tasks on tS.TaskID equals tT.TaskID
+                                  join pA in _context.patientAccount on tS.PPS_No equals pA.PPS_No
+                                  where tS.PPS_No.Equals(id) && tS.TaskID.Equals(id2) && tS.DueDate.Equals(duedate)
+                                  select new PatientDetailsViewModel
+                                  {
+                                      vmTPOT = tS,
+                                      vmTaskTable = tT,
+                                      vmPatientTable = pA,
+                                  }).ToList();
+                        
+            return View(taskDetails);
+            //return View(patientDetails);
         }
         #endregion
 
@@ -256,6 +348,27 @@ namespace RegistrationMVCCore.Controllers
         }
         #endregion
 
+        #region Complete Task
+        [HttpPost]
+        //public IActionResult CompleteTask(PatientDetailsViewModel student, int id)
+        public IActionResult CompleteTask(int id, int pid)
+        {
+            ViewBag.PatientID = id;
+
+            Task_Patient_OT_Table otp = _context.otTasks.FirstOrDefault(ot => ot.OTTaskID == pid && ot.PPS_No == id);
+
+            if (ModelState.IsValid)
+            {               
+                otp.Completed = true;
+                _context.otTasks.Update(otp);
+                _context.SaveChanges();
+                ViewBag.Message = "Note was successfuly added. ";
+            }
+            //return PartialView("_AddNote");
+            return RedirectToAction("Welcome");
+        }
+        #endregion
+
         #region Create A New Student GET
         public IActionResult CreateStudentRecord()
         {
@@ -284,25 +397,32 @@ namespace RegistrationMVCCore.Controllers
                 _context.guardians.Add(student.vmGuardian);
                 _context.SaveChanges();
 
-                var noteDetails = (from p in _context.guardians
-                                   where p.Name == student.vmGuardian.Name
-                                   select p.GuardianID).Single();
+
+
+                var id = _context.guardians.LastOrDefault();
+
+
+                //var noteDetails = (from p in _context.guardians
+                //                   where p.Name == student.vmGuardian.Name
+                //                   select p.GuardianID).Single();
 
                 //******************************************************************
                 Patient_Table newStudent = new Patient_Table()
                 {
+                    Social_Security_No = student.vmPatientTable.Social_Security_No,
+                    DoB = student.vmPatientTable.DoB,
                     Name = student.vmPatientTable.Name,
                     AddressLineOne = student.vmPatientTable.AddressLineOne,
                     City = student.vmPatientTable.City,
                     County = student.vmPatientTable.County,
                     SchoolID = student.vmPatientTable.SchoolID,
-                    GuardianID = Convert.ToInt32(noteDetails),
+                    GuardianID = Convert.ToInt32(id.GuardianID),
                     OccID = student.vmPatientTable.OccID,
                     OpenDate = Convert.ToDateTime(date)
 
                 };
                 _context.patientAccount.Add(newStudent);
-
+                
                 _context.SaveChanges();
 
                 ModelState.Clear();
@@ -350,11 +470,29 @@ namespace RegistrationMVCCore.Controllers
         public IActionResult ReassignPatient(int id, PatientDetailsViewModel student)
         {
             Patient_Table patient = _context.patientAccount.Single(p => p.PPS_No == id);
-            Task_Patient_OT_Table otp = _context.otTasks.Single(pp => pp.PPS_No == id);
-            
+            //Task_Patient_OT_Table otp = _context.otTasks.Where(pp => pp.PPS_No == id).Single();
+            Task_Patient_OT_Table otp = _context.otTasks.FirstOrDefault(pp => pp.PPS_No == id);
+            var res = _context.otTasks.Where(pp => pp.PPS_No == id);
+            //var tyg = res.FirstOrDefault().OccID = 401;
+            var gg = 7;
+            var myNewTasks = (from oT in _context.otTasks
+                              
+                              where oT.PPS_No == id
+                              select new PatientDetailsViewModel
+                              {                                
+                                  vmTPOT = oT,
+                              }).ToList();
+            var test = myNewTasks;
             if (ModelState.IsValid)
-            {                
+            {
+                //_context.otTasks.Where(pp => pp.PPS_No == id).ToList().ForEach(_context.otTasks();
+                //foreach (var item in res)
+                //{
+                //    res.FirstOrDefault().OccID = student.vmTPOT.OccID;
+                //}
+                //otp.OccID = student.vmPatientTable.OccID;            
                 patient.OccID = student.vmPatientTable.OccID;
+                //_context.otTasks.Update(otp);
                 _context.patientAccount.Update((patient));
                 _context.SaveChanges();
             }
@@ -362,6 +500,7 @@ namespace RegistrationMVCCore.Controllers
             return RedirectToAction("Welcome");
         }
         #endregion
+
         #region Remove OT
         public IActionResult RemoveOT(int? id)
         {
@@ -409,6 +548,7 @@ namespace RegistrationMVCCore.Controllers
             //return View();
         }
         #endregion
+
         #region Delete Patient
         public IActionResult DeletePatient(int? id)
         {
@@ -532,15 +672,15 @@ namespace RegistrationMVCCore.Controllers
         //    return View();
         //}
 
-        public IActionResult Error()
-        {
-            return View();
-        }
+        //public IActionResult Error()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
         #endregion
     }
 }

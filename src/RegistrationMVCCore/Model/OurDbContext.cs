@@ -28,8 +28,10 @@ namespace RegistrationMVCCore.Model
             modelBuilder.Entity<NotePatient_Table>()
                 .HasKey(k => new { k.NoteID, k.PPS_No });
 
+            //modelBuilder.Entity<Task_Patient_OT_Table>()
+            //    .HasKey(k => new { k.TaskID, k.PPS_No,k.OccID });
             modelBuilder.Entity<Task_Patient_OT_Table>()
-                .HasKey(k => new { k.TaskID, k.PPS_No,k.OccID });
+                .HasKey(k => new { k.OTTaskID });
         }
 
         public DbSet<Notes_Table> notes { get; set; }

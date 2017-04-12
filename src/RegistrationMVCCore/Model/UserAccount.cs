@@ -28,11 +28,14 @@ namespace RegistrationMVCCore.Model
         [Compare("Password", ErrorMessage ="Password does not match")]
         [DataType(DataType.Password)]
         public string CofirmPassword { get; set; }
+        public bool IsAdmin { get; set; }
     }
     public class Patient_Table
     {
         [Key, Display(Name ="PPS Number")]
         public int PPS_No { get; set; }
+        public string DoB { get; set; }
+        public string Social_Security_No { get; set; }
         [Display(Name = "Student Name")]
         public string Name { get; set; }
         [Display(Name = "Address line 1")]
@@ -83,12 +86,18 @@ namespace RegistrationMVCCore.Model
     }
     public class Task_Patient_OT_Table
     {
-        [Key, Column(Order = 0)]
+        [Key]
+        public int OTTaskID { get; set; }
+
+        //[Key, Column(Order = 0)]
         public int TaskID { get; set; }
-        [Key, Column(Order = 1)]
+
+        //[Key, Column(Order = 1)]
         public int PPS_No { get; set; }
-        [Key, Column(Order = 2)]
+
+        //[Key, Column(Order = 2)]
         public int OccID { get; set; }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DueDate { get; set; }
         public bool Completed { get; set; }

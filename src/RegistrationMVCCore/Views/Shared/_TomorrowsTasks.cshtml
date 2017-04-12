@@ -3,10 +3,44 @@
 <div class="panel-heading" style="font:bold;background-color:#2196F3; color:#F7FFFF"><strong>Patient Name&nbsp;&nbsp;&nbsp; Task type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duedate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed</strong></div>
 <div class="panel-body" style="height:423px">
     <div class="right-inner-addon" style="width:170px;">
+        @if (ViewBag.Flag1 != "False")
+        {
+            @if (Model.Any())
+            {
+                <table class="table table-condensed table-hover">
+                    @foreach (var item in Model)
+                        {
+                         <tr>
+                            <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>@item.vmTPOT.DueDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                            @if (@item.vmTPOT.Completed.ToString() == "False")
+                            {
+                                <td style="color:red">No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            }
+                            else
+                            {
+                              <td style="color:green">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            }
+                            <td>@Html.ActionLink("TaskDetails", "TaskDetails", new { id = item.vmPatientTable.PPS_No, id2 = item.vmTaskTable.TaskID, duedate = item.vmTPOT.DueDate }, new { @class = "btn btn-info btn-xs" })</td>
+                         </tr>
+                        }
+                </table>
+            }
+            else
+            {
+                <p>No records found.</p>
+            }
+        }
+        else
+        {
+            <p>No tasks found.</p>
+        }
         @if (Model.Any())
         {
           <table class="table table-condensed table-hover">
-            @foreach (var item in Model)
+            @*@foreach (var item in Model)
             {
              <tr>
                 <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -23,7 +57,7 @@
                 }
                 <td>@Html.ActionLink("Details", "Details", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
              </tr>
-            }
+            }*@
           </table>
         }
         else

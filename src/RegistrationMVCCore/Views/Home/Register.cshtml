@@ -3,76 +3,63 @@
     ViewData["Titel"] = "Register";
 }
 @*<h2>Register</h2>*@
-
-<div class="w3-card-4" style="width:850px;background-color:#FFFFFF; height:400px; margin-left:100px; margin-top:50px">
+@if (ViewBag.Message != null)
+            {
+    <div class="form-control">
+        <div class="col-md-12" style="color:blue">
+            @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+        </div>
+    </div>
+}
+<div class="w3-card-4" style="width:850px;background-color:#FFFFFF; height:500px; margin-left:100px; margin-top:50px">
     <header class="w3-container w3-blue">
         <h4>Add a new therapist &nbsp;<i class="glyphicon glyphicon-cog"></i></h4>
     </header>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="w3-container" style="margin:20px; height:225px;width:350px; float:left">
-        @*<ul style="list-style:none">*@
-            <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
-            <input asp-for="@Model.FirstName" placeholder="First Name" class="form-control" />
-            <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
-
-            @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">
-                <input asp-for="FirstName" placeholder="First Name" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>*@
-                @*</li>*@
+    <div class="w3-container" style="margin:20px; height:225px;width:350px; float:left">       
+            <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">           
+                <input asp-for="@Model.FirstName" placeholder="First Name" class="form-control" />
+                <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group" style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">
-            @*<li style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">*@
-            <input asp-for="@Model.Email" placeholder="Email Address" class="form-control" />
-            <span asp-validation-for="@Model.Email" class="text-danger"></span>
-            @*</li>*@
+            <div class="form-group" style="padding:5px 0 ; margin-bottom:20px; margin-top:10px">           
+                <input asp-for="@Model.Email" placeholder="Email Address" class="form-control" />
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>           
             </div>
-            <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0; margin-bottom:20px; margin-top:20px">*@
-            <input asp-for="@Model.Password" placeholder="Password" class="form-control" />
-            <span asp-validation-for="@Model.Password" class="text-danger"></span>
-            @*</li>*@
-            </div>
-            @*<div class="form-group" style="padding:5px 0">*@
-                 @*<li style="padding:5px 0">*@
-                @*<a asp-area="" asp-controller="Home" asp-action="Logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout</a>*@
-                 @*</li>*@
-            @*</div>*@
-        @*</ul>*@
-        <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:33px">
+            <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:20px">           
+                <input asp-for="@Model.Password" placeholder="Password" class="form-control" />
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>           
+            </div>           
+        <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:53px">
             @Html.ActionLink("Cancel", "Welcome", new { id = 2 }, new { @class = "btn btn-lg btn-primary btn-block btn-signin", @style = "margin-top:0px" })
         </div>
         
     </div>
     <div class="w3-container" style="margin:20px;height:225px;width:350px;float:left ">
-        @*<ul style="list-style:none">*@
-<div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
-                <input asp-for="@Model.LastName" placeholder="Last Name" class="form-control" />
-                <span asp-validation-for="@Model.LastName" class="text-danger"></span>
-            @*</li>*@
-    </div>
-    <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:10px ">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:10px ">*@
+        
+         <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">            
+            <input asp-for="@Model.LastName" placeholder="Last Name" class="form-control" />
+            <span asp-validation-for="@Model.LastName" class="text-danger"></span>            
+        </div>
+        <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:10px ">           
             <input asp-for="@Model.UserName" placeholder="Username" class="form-control" />
-            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
-            @*</li>*@
-    </div>
-    <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
-            @*<li style="padding:5px 0;margin-bottom:20px; margin-top:20px">*@
+            <span asp-validation-for="@Model.UserName" class="text-danger"></span>           
+        </div>
+        <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">          
             <input asp-for="@Model.CofirmPassword" placeholder="Confirm Password" class="form-control" />
+            <span asp-validation-for="@Model.CofirmPassword" class="text-danger"></span>           
+        </div>
+        <div class="form-group" style="padding:5px 0;margin-bottom:20px; margin-top:20px">
+            @*<input asp-for="@Model.CofirmPassword" placeholder="Confirm Password" class="form-control" />*@
+            <input asp-for="@Model.IsAdmin" type="radio" value="True" /> Is Admin
             <span asp-validation-for="@Model.CofirmPassword" class="text-danger"></span>
-            @*</li>*@
-    </div>
-    <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:33px">
-            @*<li style="padding:5px 0">*@
-            <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Register" />
-            @*</li>*@
+        </div>
+        <div class="form-group" style="padding:5px 0; margin-bottom:20px; margin-top:53px">           
+            <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Register" />           
             </div>
             
-        @*</ul>*@
+       
     </div>
 }
 </div>

@@ -1,10 +1,10 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
 
 <div class="w3-cell-row" style="height:35px">
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:120px ">
         Patient Name
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:120px ">
         Address
     </div>
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
@@ -14,7 +14,7 @@
         Open Date
     </div>
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Action
+        Delete
     </div>
 </div>
     
@@ -34,12 +34,12 @@
                 @foreach (var item in Model)
             {
                     <tr>
-                        <td style="width:95px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>@item.vmPatientTable.AddressLineOne&nbsp;&nbsp;&nbsp;</td>
-                        <td>@item.vmGuardian.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td>@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td style="width:95px !important; padding-right:20px; width:120px !important`; height:50px !important">@item.vmPatientTable.Name</td>
+                        <td style="padding-left:20px">@item.vmPatientTable.AddressLineOne</td>
+                        <td style="padding-right:20px">@item.vmGuardian.Name</td>
+                    <td style="padding-right:40px">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</td>
                   
-                    <td>@Html.ActionLink("Delete", "DeletePatient1", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-info btn-xs" })</td>
+                    <td style="padding-right:20px;">@Html.ActionLink("x", "DeletePatient1", new { id = item.vmPatientTable.PPS_No }, new { @class = "btn btn-danger btn-xs" })</td>
                 </tr>
                 }
             </table>
