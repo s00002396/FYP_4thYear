@@ -1,27 +1,41 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.MyViewModel>
 
 <div class="container" style="background-color:#F4F4F5;width:980px">
-    <div style="height:50px"></div>   
-
+    <div style="height:50px"></div> 
     <section style="width:900px; margin-left:0px">
         <section style="height:50px;width:590px;float:right;margin-left:30px ">
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test"><a data-toggle="tab" href="#home">Todays Tasks</a></li>
                 <li class="test1"><a data-toggle="tab" href="#menu1">All Tasks</a></li>
-                @*<li class="active test"><a data-toggle="tab" href="#home1">All Patients</a></li>*@ 
             </ul>
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
                     <div class="box" style="width:590px;">
                         <div class="w3-card-4" style="background-color:#FFFFFF">
-                            @Html.Partial("_TodaysTasks", Model)
+                            @if (Model.FirstOrDefault().vmTaskTable != null)
+                            {
+                                @Html.Partial("_TodaysTasks", Model)
+                                <h1>Full</h1>
+                            }
+                            else
+                            {
+                                <h2>No records</h2>
+                            }
                         </div>
                     </div>
                 </div>
                 <div id="menu1" class="tab-pane fade">                    
                     <div class="box" style="width:590px; ">
                         <div class="w3-card-4" style="background-color:#FFFFFF">
-                           @Html.Partial("_TomorrowsTasks", Model) 
+                            @if (Model.FirstOrDefault().vmTaskTable != null)
+                            {
+                                @Html.Partial("_TomorrowsTasks", Model)
+                                <h1>Full</h1>
+                            }
+                            else
+                            {
+                                <h2>No records</h2>
+                            }
                         </div>
                     </div>
                 </div>  
@@ -34,7 +48,6 @@
                 </div>*@             
             </div>
         </section>
-
     <aside>
             @*****************Client Search*********************************************@
             <div class="w3-card-4" style="width:300px">
@@ -87,10 +100,7 @@
                     </ul>
                 </div>
             </div>
-
-
         }
-
             @*****************Admin****************************************************@
             @if (ViewBag.Admin == "True")
             {
@@ -123,7 +133,6 @@
                 </div>
             </div>
         }
-
     </aside>
  </section>
 </div>

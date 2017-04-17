@@ -44,15 +44,13 @@ namespace RegistrationMVCCore.Controllers
                                           }).ToList();
                     var ss = patientDetails;
                     return View("Details", patientDetails);
-                }
-                
+                }                
                 else
                 {
                     var patientDetails = (from pA in _context.patientAccount
                                           join g in _context.guardians on pA.GuardianID equals g.GuardianID
                                           join s in _context.schoolLists on pA.SchoolID equals s.SchoolID
                                           join uA in _context.userAccount on pA.OccID equals uA.UserID
-                                          
                                           where pA.Name.StartsWith(search) || search == null
                                           select new PatientDetailsViewModel
                                           {
@@ -78,9 +76,7 @@ namespace RegistrationMVCCore.Controllers
                                   join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
                                   join uA in _context.userAccount on otTask.OccID equals uA.UserID
                                   join pA in _context.patientAccount on otTask.PPS_No equals pA.PPS_No
-                                 
-                                  where otTask.OccID.Equals(occID)
-                                
+                                  where otTask.OccID.Equals(occID)                                
                                   select new MyViewModel
                                   {
                                       vmTaskTable = t,
@@ -100,54 +96,32 @@ namespace RegistrationMVCCore.Controllers
                                 ViewBag.Admin = "False";
                                 return View(myNewTasks);
                             }
-
-                }
+                        }
                         catch (Exception)
                         {
-                    var myNewTasks1 = (from uA in _context.userAccount
-                                      //join otTask in _context.otTasks on t.TaskID equals otTask.TaskID
-                                      //join uA in _context.userAccount on otTask.OccID equals uA.UserID
-                                      //join pA in _context.patientAccount on uA.UserID equals pA.OccID
-                                      //where otTask.OccID.Equals(occID)
-                                      //where otTask.OccID.Equals(occID) || occID == null
+                            var myNewTasks1 = (from uA in _context.userAccount
                                       where uA.UserID.Equals(occID)
                                       select new MyViewModel
                                       {
-                                          //vmTaskTable = t,
                                           vmUserAcc = uA,
-                                          //vmTPOT = otTask,
-                                          //vmPatientTable = pA
                                       }).ToList();
                     if (myNewTasks1.FirstOrDefault().vmUserAcc.IsAdmin == true)
                     {
-                        ViewBag.Admin = "True";
-                        ViewBag.Flag1 = "False";
-                        return View(myNewTasks1);
+                       ViewBag.Admin = "True";
+                       ViewBag.Flag1 = "False";
+                       return View(myNewTasks1);
                     }
-                    //var uu = myNewTasks1;
-                    //return View(myNewTasks);
-                    //return RedirectToAction("Welcome");
-                        }
-
-                //if (myNewTasks.FirstOrDefault().vmUserAcc.IsAdmin == true)
-                //{ 
-                //    ViewBag.Admin = "True";
-                //}
-                //return View(myNewTasks);
-                //}
-                //else
-                //{
-                //    return RedirectToAction("Login");
-                //}
-                // }
-                //catch (Exception)
-                //{
-                //    return RedirectToAction("Welcome");
-                //}
+                    else
+                    {
+                       ViewBag.Admin = "False";
+                       return View(myNewTasks1);
+                    }
+                }
 
             } //end if (HttpContext.Session.GetString("UserID") != null)
             #endregion
 
+            //return View();
             return RedirectToAction("Welcome");
         }
         #endregion
@@ -222,7 +196,6 @@ namespace RegistrationMVCCore.Controllers
             return View(patientDetails);
         }
         #endregion
-
 
         #region Task Details
         public ActionResult TaskDetails(int? id, int? id2, DateTime duedate)
@@ -546,6 +519,7 @@ namespace RegistrationMVCCore.Controllers
             //return View();
         }
         #endregion
+
         #region Get Patients for specific therapist
         public ActionResult Therapist_Patient_Details(int? id)
         {
@@ -570,6 +544,7 @@ namespace RegistrationMVCCore.Controllers
             return View(patientDetails);
         }
         #endregion
+
         #region Delete Patient
         public IActionResult DeletePatient(int? id)
         {
