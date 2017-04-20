@@ -1,26 +1,26 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
 
 <div class="w3-cell-row" style="height:35px">
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:120px ">
         Therapist Name
     </div>
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
         Username
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:160px ">
         Email Address
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:100px">
         Employee No.
     </div>
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Action
+        Tasks
     </div>
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Action
+        Patients
     </div>
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-        Action
+        Delete
     </div>
 </div>
 <div class="panel-body" style="height:383px">
@@ -39,16 +39,16 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="width:95px !important">@item.vmUserAcc.FirstName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>@item.vmUserAcc.UserName&nbsp;&nbsp;&nbsp;</td>
-                        <td>@item.vmUserAcc.Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>@item.vmUserAcc.UserID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td style="width:95px !important; padding:15px">@item.vmUserAcc.FirstName</td>
+                        <td style="width:95px !important; padding:15px">@item.vmUserAcc.UserName&nbsp;&nbsp;&nbsp;</td>
+                        <td style="width:95px !important; padding:15px">@item.vmUserAcc.Email</td>
+                        <td style="width:95px !important; padding:15px 15px 15px 45px">@item.vmUserAcc.UserID</td>
 
-                        <td>@Html.ActionLink("Reassign Tasks", "Therapist_Patient_Details", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
+                        <td style="width:95px !important; padding:15px 15px 15px 35px">@Html.ActionLink("Reassign", "Therapist_Patient_Details", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
 
-                        <td onclick="reassignPatient1('@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="btn btn-info btn-xs">Reass</i></td>
+                        <td style="width:95px !important; padding:15px" onclick="reassignPatient1('@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="btn btn-info btn-xs">Reassign</i></td>
 
-                        <td>@Html.ActionLink("X", "DeleteOT", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
+                        <td style="width:95px !important; padding:15px 15px 15px 35px">@Html.ActionLink("X", "DeleteOT", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-danger btn-xs" })</td>
                     </tr>
                 }
             </table>
@@ -62,7 +62,6 @@
 @section scripts
 {
     <script>
-        //alert("Hello ");
     /**********Reassign Patient**********/
         function reassignPatient1(patientId) {
         alert("Hello ");

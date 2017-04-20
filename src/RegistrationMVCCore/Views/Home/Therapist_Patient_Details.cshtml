@@ -5,30 +5,27 @@
     <h2>Patients with pending tasks for @Model.FirstOrDefault().vmUserAcc.FirstName</h2>
     <div class="w3-cell-row" style="height:35px; margin-top:10px">
        
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:145px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
             Patient Name
         </div>
         
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
             Guardian Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:165px">
             School Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:195px">
             Task Type
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
             Due Date
         </div>
-        @*<div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-            Assign to 
-        </div>*@
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px ">
-            Action
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px ">
+            Edit
         </div>
     </div>
-    <div class="panel-body" style="height:383px">
+    <div class="panel-body" style="height:auto;">
         <div class="right-inner-addon" style="width:569px">
             @if (ViewBag.Message != null)
             {
@@ -40,38 +37,22 @@
             }
             @if (Model.Any())
             {
-                <table class="table table-condensed table-hover" style="width:1100px">
+                <table class="table table-condensed table-hover" style="width:1000px;margin-left:45px;">
                     @foreach (var item in Model)
                     {
-                        <tr style="width:895px !important;">
+                        <tr style="width:895px !important">
                     @using (Html.BeginForm())
                     {
                     @Html.AntiForgeryToken()
-                        @*<div>
-                            <input asp-for="@item.vmTPOT.OTTaskID" class="text-danger" />
-                            <input asp-for="@Model.FirstOrDefault().vmPatientTable.Name" class="text-danger" />
-                            <input asp-for="@Model.FirstOrDefault().vmTPOT.OTTaskID" class="text-danger" />
-                            <input asp-for="@item.vmTaskTable.TaskType" class="text-danger" />
-                        </div>*@
-                            <td style="width:195px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;</td>
+                            <td style="width:195px !important;padding-left:60px">@item.vmPatientTable.Name</td>
                             
-                            <td style="width:195px !important">@item.vmGuardian.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td style="width:165px !important">@item.vmSchools.SchoolName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td style="width:175px !important; padding-left:0px">@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="width:195px !important;padding-left:25px">@item.vmGuardian.Name</td>
+                            <td style="width:165px !important">@item.vmSchools.SchoolName</td>
+                            <td style="width:175px !important; padding-left:0px">@item.vmTaskTable.TaskType</td>
     
-                            <td style="width:185px !important">@item.vmTPOT.DueDate.ToString("dd/MM/yyyy")</td>                          
-                         
-                            @*<td style="width:255px !important">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            
-                            @Html.DropDownListFor(model => model.FirstOrDefault().vmUserAcc.UserID, ViewBag.OTList2 as SelectList, "--Select OT Name--", new { @class = "form-control" })
-                            </td>*@
-
-                            @*<td style="width:185px !important; padding-left:50px"><input type="submit" style="width:65px; float:left" class="btn btn-sm btn-primary btn-block btn-signin" value="Confirm" /></td>*@
-    @*<td>
-        <span onclick="Therapist_Patient_Details('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-pencil"></i> &nbsp;Edit</span></td>*@
+                            <td style="width:185px !important">@item.vmTPOT.DueDate.ToString("dd/MM/yyyy")</td>   
     <td>
-        <span onclick="ReassignDetails('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-pencil"></i> &nbsp;Edit</span>
+        <span onclick="ReassignDetails('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer; color:green" class="glyphicon glyphicon-pencil"></i> &nbsp;</span>
     </td>
 }@*end Using*@ 
                         </tr>
@@ -119,22 +100,17 @@ else
 {
     <script>       
         /**********Reassign Patient**********/
-        //function Therapist_Patient_Details(patientId, userId) {
         function ReassignDetails(patientId, userId) {
-            //alert("Test " + patientId);
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("ReassignDetails")',
                 data: { id: patientId, id2: userId },
-                //alert("UserID " + userId);
                 success: function (data) {
-                    //$('#NoteDetail').hide();
                     $('#AddNoteDetail').hide();
                     //$('#TaskDetail').hide();
                     //$('#Detail1').hide();
                     $('#AddNoteDetail').html(data);
                     $('#AddNoteDetail').fadeIn("slow");
-                    //window.location = '/Home/ReassignDetails';
                 },
                 error: function (data) {
                     alert("Error ReassignDetails");

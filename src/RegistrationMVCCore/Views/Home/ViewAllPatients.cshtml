@@ -73,121 +73,25 @@
         }
     </div>
 </div>
-
 <div id="Detail2"></div>
 <div id="Detail3"></div>
 <div id="Detail"></div>
 
-@*</div>*@@*Container*@
-
 @section scripts
 {
     <script>
-                                    function showPatient(patientId) {
-                                        $.ajax({
-                                            type: "GET",
-                                            url: '@Url.Action("Details")',
-                                            data: { id: patientId },
-                                            success: function (data) {
-                                                //alert("Show actors2 " + patientId);
-                                                window.location = '/Home/Details/' + patientId;
-                                                //$('#Detail').hide();
-                                                //$('#Detail2').hide();
-                                                //$('#Detail1').hide();
-                                                //$('#Detail3').hide();
-                                                //$('#Detail').html(data);
-                                                //$('#Detail').fadeIn("slow");
-                                            },
-                                            error: function (data) {
-                                                $('#Detail').html('<h3>Error in retrieval</h3>');
-                                            }
-                                        });
-                                    }
-                                    @*function showPatientDetails(patientId, dateId) {
-
-                                        $.ajax({
-                                            type: "GET",
-                                            url: '@Url.Action("PatientNotesDetails")',
-                                            data: { pd: patientId, dt: dateId },
-                                            success: function (data) {
-                                                $('#Detail').hde();
-
-                                                $('#Detail1').html(data);
-                                                $('#Detail1').fadeIn("slow");
-                                            },
-                                            error: function (data) {
-                                                $('#Detail1').fadeIn("slow");
-                                                alert("Error");
-                                                $('#Detail1').html('<h3>Error in retrieval of Details</h3>');
-                                            }
-                                        });
-                                    }*@
-                                    @*function showPatientDetails2(patientId) {
-                                        //alert("Show actors2 " + patientId);
-                                        $.ajax({
-                                            type: "GET",
-                                            url: '@Url.Action("AddNote")',
-                                            data: { id: patientId },
-                                            success: function (data) {
-                                                $('#Detail').hide();
-                                                $('#Detail2').hide();
-                                                //alert("Show actors2 ");
-                                                $('#Detail2').html(data);
-                                                $('#Detail2').fadeIn("slow");
-                                            },
-                                            error: function (data) {
-                                                alert("Show actors2 error ");
-                                                $('#Detail2').fadeIn("slow");
-                                                alert("Error");
-                                                $('#Detail2').html('<h3>Error in retrieval of Details (Add note)</h3>');
-                                            }
-                                        });
-                                    }*@
-                                    @*function showPatientDetails3(patientId) {
-                                        //alert("Show actors2 " + patientId);
-                                        $.ajax({
-                                            type: "GET",
-                                            url: '@Url.Action("Welcome")',
-                                            data: { id: patientId },
-                                            success: function (data) {
-                                                window.location = '/Home/Welcome';
-                                                //$('#Detail').hide();
-                                                //$('#Detail2').hide();
-                                                //alert("showPatientDetails3 ");
-                                                //$('#Detail2').html(data);
-                                                //$('#Detail2').fadeIn("slow");
-                                            },
-                                            error: function (data) {
-                                                alert("Show actors2 error ");
-                                                $('#Detail2').fadeIn("slow");
-                                                alert("Error");
-                                                $('#Detail2').html('<h3>Error in retrieval of Details (Welcome)</h3>');
-                                            }
-                                        });
-                                    }*@
-                                    @*function showPatientDetails4(patientId) {
-                                        //alert("Patient ID " + patientId);
-                                        $.ajax({
-                                            type: "GET",
-                                            url: '@Url.Action("ReassignPatient")',
-                                            data: { id: patientId },
-                                            success: function (data) {
-                                                //window.location = 'ReassignPatient';
-                                                //alert("Show student 2 ");
-                                                $('#Detail').hide();
-                                                $('#Detail2').hide();
-                                                $('#Detail1').hide();
-                                                //alert("Show student 1 ");
-                                                $('#Detail3').html(data);
-                                                $('#Detail3').fadeIn("slow");
-                                            },
-                                            error: function (data) {
-                                                alert("Error ");
-                                                $('#Detail2').fadeIn("slow");
-                                                //alert("Error");
-                                                $('#Detail2').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
-                                            }
-                                        });
-                                    }*@
+        function showPatient(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Details")',
+                data: { id: patientId },
+                success: function (data) {
+                    window.location = '/Home/Details/' + patientId;
+                },
+                error: function (data) {
+                    $('#Detail').html('<h3>Error in retrieval</h3>');
+                }
+            });
+        }
     </script>
 }

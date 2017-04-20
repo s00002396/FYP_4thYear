@@ -1,7 +1,9 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
+<h5 style="float:left;margin-bottom:15px;padding:5px">Remove OT</h5>
+<h6 style="float:left;margin-bottom:15px;padding:5px">*All patients must be reassigned first</h6>
 <div class="container" style="background-color:#F4F4F5; height:500px">
-    <section style="width:900px; margin-left:0px">
-        <section style="height:50px;width:590px;float:right;margin-left:30px ">
+    <section style="width:900px; margin-left:0px; margin-right:0px; background-color:lightcoral">
+        <section style="height:50px;width:590px;float:left;margin-left:100px; margin-top:0px ">
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test"><a data-toggle="tab" href="#home">All Therapists</a></li>
             </ul>
@@ -15,18 +17,14 @@
                 </div>
             </div>
         </section>
-    </section>
-    <h5>Remove OT</h5>
-    <h6>*All patients must be reassigned first</h6>
+    </section>    
 </div>
 
 @section scripts
 {
     <script>
-        //alert("Hello ");
     /**********Reassign Patient**********/
         function reassignPatient12(patientId) {
-        //alert("Hello ");
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("Therapist_Patient_Details")',
@@ -47,20 +45,12 @@
                 });
         }
         function reassignPatient1(patientId) {
-            //alert("Hello ");
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("Therapist_Patient_Details")',
                 data: { id: patientId },
                 success: function (data) {
-                        //alert("Show actors2 " + patientId);
-                    window.location = '/Home/Therapist_Patient_Details_For_Deleting/' + patientId;
-                        //$('#Detail').hide();
-                        //$('#Detail2').hide();
-                        //$('#Detail1').hide();
-                        //$('#Detail3').hide();
-                        //$('#Detail').html(data);
-                        //$('#Detail').fadeIn("slow");
+                    window.location = '/Home/Therapist_Patient_Details_For_Deleting/' + patientId;                        
                 },
                 error: function (data) {
                     alert("Error ");
