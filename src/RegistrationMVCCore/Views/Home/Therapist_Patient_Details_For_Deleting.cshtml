@@ -1,29 +1,28 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
-
+<h3>Reassign these patients</h3>
 @if (Model.Count > 0)
-{
-    <h2>Patients with pending tasks for @Model.FirstOrDefault().vmUserAcc.FirstName</h2>
+{   
     <div class="w3-cell-row" style="height:35px; margin-top:10px">
-       
+
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:145px">
             Patient Name
         </div>
-        
+
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
             Guardian Name
         </div>
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:150px">
             School Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+        @*<div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
             Task Type
         </div>
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px">
             Due Date
-        </div>
-        @*<div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-            Assign to 
         </div>*@
+        @*<div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+                Assign to
+            </div>*@
         <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px ">
             Action
         </div>
@@ -44,36 +43,37 @@
                     @foreach (var item in Model)
                     {
                         <tr style="width:895px !important;">
-                    @using (Html.BeginForm())
-                    {
-                    @Html.AntiForgeryToken()
-                        @*<div>
-                            <input asp-for="@item.vmTPOT.OTTaskID" class="text-danger" />
-                            <input asp-for="@Model.FirstOrDefault().vmPatientTable.Name" class="text-danger" />
-                            <input asp-for="@Model.FirstOrDefault().vmTPOT.OTTaskID" class="text-danger" />
-                            <input asp-for="@item.vmTaskTable.TaskType" class="text-danger" />
-                        </div>*@
-                            <td style="width:195px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;</td>
-                            
-                            <td style="width:195px !important">@item.vmGuardian.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td style="width:165px !important">@item.vmSchools.SchoolName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td style="width:175px !important; padding-left:0px">@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    
-                            <td style="width:185px !important">@item.vmTPOT.DueDate.ToString("dd/MM/yyyy")</td>                          
-                         
-                            @*<td style="width:255px !important">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            
-                            @Html.DropDownListFor(model => model.FirstOrDefault().vmUserAcc.UserID, ViewBag.OTList2 as SelectList, "--Select OT Name--", new { @class = "form-control" })
-                            </td>*@
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @*<div>
+                                        <input asp-for="@item.vmTPOT.OTTaskID" class="text-danger" />
+                                        <input asp-for="@Model.FirstOrDefault().vmPatientTable.Name" class="text-danger" />
+                                        <input asp-for="@Model.FirstOrDefault().vmTPOT.OTTaskID" class="text-danger" />
+                                        <input asp-for="@item.vmTaskTable.TaskType" class="text-danger" />
+                                    </div>*@
+                                <td style="width:195px !important">@item.vmPatientTable.Name&nbsp;&nbsp;&nbsp;</td>
 
-                            @*<td style="width:185px !important; padding-left:50px"><input type="submit" style="width:65px; float:left" class="btn btn-sm btn-primary btn-block btn-signin" value="Confirm" /></td>*@
-    @*<td>
-        <span onclick="Therapist_Patient_Details('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-pencil"></i> &nbsp;Edit</span></td>*@
-    <td>
-        <span onclick="ReassignDetails('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-pencil"></i> &nbsp;Edit</span>
-    </td>
-}@*end Using*@ 
+                                <td style="width:195px !important">@item.vmGuardian.Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td style="width:165px !important">@item.vmSchools.SchoolName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td onclick="reassignPatient('@item.vmPatientTable.PPS_No')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</td>
+                                @*<td style="width:175px !important; padding-left:0px">@item.vmTaskTable.TaskType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                <td style="width:185px !important">@item.vmTPOT.DueDate.ToString("dd/MM/yyyy")</td>*@
+
+                                @*<td style="width:255px !important">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    @Html.DropDownListFor(model => model.FirstOrDefault().vmUserAcc.UserID, ViewBag.OTList2 as SelectList, "--Select OT Name--", new { @class = "form-control" })
+                                    </td>*@
+
+                                @*<td style="width:185px !important; padding-left:50px"><input type="submit" style="width:65px; float:left" class="btn btn-sm btn-primary btn-block btn-signin" value="Confirm" /></td>*@
+                                @*<td>
+                                    <span onclick="Therapist_Patient_Details('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-pencil"></i> &nbsp;Edit</span></td>*@
+                                @*<td>
+                                    <span onclick="ReassignDetails('@item.vmTPOT.OTTaskID', '@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-pencil"></i> &nbsp;Edit</span>
+                                </td>*@
+                            }@*end Using*@
                         </tr>
                     }
                 </table>
@@ -111,13 +111,36 @@ else
             Action
         </div>
     </div>
-    <h2>OT has no outstanding tasks</h2>
-    
+    <h2>OT has no patients</h2>
+
 }
-<div id="AddNoteDetail"></div> @*AddNote*@
+<div id="ReassignPatientDetail1"></div> @*AddNote*@
 @section scripts
 {
-    <script>       
+    <script>
+        /**********Reassign Patient**********/
+        function reassignPatient(patientId) {
+            $.ajax({
+                type: "GET",
+                @*url: '@Url.Action("ReassignPatient")',*@
+                url: '@Url.Action("ReassignPatientDelete")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#TaskDetail').hide();
+                    $('#Detail1').hide();
+                    $('#ReassignPatientDetail1').html(data);
+                    $('#ReassignPatientDetail1').fadeIn("slow");
+                },
+                error: function (data) {
+                    alert("Error ");
+                    $('#ReassignPatientDetail1').fadeIn("slow");
+                    $('#ReassignPatientDetail1').html('<h3>Error in retrieval of ReassignPatientDelete Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+
         /**********Reassign Patient**********/
         //function Therapist_Patient_Details(patientId, userId) {
         function ReassignDetails(patientId, userId) {

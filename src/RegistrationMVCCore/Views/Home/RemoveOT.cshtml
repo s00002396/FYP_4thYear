@@ -7,8 +7,8 @@
             </ul>
             <div class="tab-content">
                 <div id="home1" class="tab-pane fade in active">
-                    <div class="box" style="width:590px;">
-                        <div class="w3-card-4" style="background-color:#FFFFFF">
+                    <div class="box" style="width:790px;">
+                        <div class="w3-card-4" style="background-color:#FFFFFF; ">
                             @Html.Partial("_DeleteOT", Model)
                         </div>
                     </div>
@@ -19,4 +19,56 @@
     <h5>Remove OT</h5>
     <h6>*All patients must be reassigned first</h6>
 </div>
+
+@section scripts
+{
+    <script>
+        //alert("Hello ");
+    /**********Reassign Patient**********/
+        function reassignPatient12(patientId) {
+        //alert("Hello ");
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Therapist_Patient_Details")',
+                data: { id: patientId },
+                success: function (data) {
+                $('#NoteDetail').hide();
+                $('#AddNoteDetail').hide();
+                $('#TaskDetail').hide();
+                $('#Detail1').hide();
+                $('#ReassignPatientDetail').html(data);
+                $('#ReassignPatientDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                alert("Error ");
+                $('#ReassignPatientDetail').fadeIn("slow");
+                $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+                });
+        }
+        function reassignPatient1(patientId) {
+            //alert("Hello ");
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Therapist_Patient_Details")',
+                data: { id: patientId },
+                success: function (data) {
+                        //alert("Show actors2 " + patientId);
+                    window.location = '/Home/Therapist_Patient_Details_For_Deleting/' + patientId;
+                        //$('#Detail').hide();
+                        //$('#Detail2').hide();
+                        //$('#Detail1').hide();
+                        //$('#Detail3').hide();
+                        //$('#Detail').html(data);
+                        //$('#Detail').fadeIn("slow");
+                },
+                error: function (data) {
+                    alert("Error ");
+                    $('#ReassignPatientDetail').fadeIn("slow");
+                    $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+    </script>
+}
 

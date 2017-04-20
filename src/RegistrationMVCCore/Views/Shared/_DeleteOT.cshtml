@@ -16,9 +16,15 @@
     <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
         Action
     </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Action
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Action
+    </div>
 </div>
 <div class="panel-body" style="height:383px">
-    <div class="right-inner-addon" style="width:569px">
+    <div class="right-inner-addon" style="width:769px">
         @if (ViewBag.Message != null)
         {
             <div class="form-control">
@@ -38,7 +44,11 @@
                         <td>@item.vmUserAcc.Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>@item.vmUserAcc.UserID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-                        <td>@Html.ActionLink("Reassign", "Therapist_Patient_Details", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
+                        <td>@Html.ActionLink("Reassign Tasks", "Therapist_Patient_Details", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
+
+                        <td onclick="reassignPatient1('@item.vmUserAcc.UserID')"><i style="margin-left:10px; cursor:pointer" class="btn btn-info btn-xs">Reass</i></td>
+
+                        <td>@Html.ActionLink("X", "DeleteOT", new { id = item.vmUserAcc.UserID }, new { @class = "btn btn-info btn-xs" })</td>
                     </tr>
                 }
             </table>
@@ -46,4 +56,34 @@
         else
         {<p>No records found.</p>}
     </div>
+    <div id="ReassignPatientDetail"></div>@*ReassignPatient*@
 </div>
+
+@section scripts
+{
+    <script>
+        //alert("Hello ");
+    /**********Reassign Patient**********/
+        function reassignPatient1(patientId) {
+        alert("Hello ");
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ViewAllPatients")',
+                data: { id: patientId },
+                success: function (data) {
+                $('#NoteDetail').hide();
+                $('#AddNoteDetail').hide();
+                $('#TaskDetail').hide();
+                $('#Detail1').hide();
+                $('#ReassignPatientDetail').html(data);
+                $('#ReassignPatientDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                alert("Error ");
+                $('#ReassignPatientDetail').fadeIn("slow");
+                $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+                });
+        }
+</script>
+}

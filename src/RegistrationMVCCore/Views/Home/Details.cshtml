@@ -1,4 +1,13 @@
 ﻿@model ICollection<RegistrationMVCCore.Model.PatientDetailsViewModel>
+
+@if (ViewBag.Message != null)
+{
+    <div class="form-control">
+        <div class="col-md-12" style="color:blue">
+            @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+        </div>
+    </div>
+}
 <div class="container" style="background-color:#FfFfFf; height:600px">
     <div class="w3-container">
         <h2 class="glyphicon glyphicon-user" style="color:#2196F3"><span>&nbsp;Patient Details</span></h2>

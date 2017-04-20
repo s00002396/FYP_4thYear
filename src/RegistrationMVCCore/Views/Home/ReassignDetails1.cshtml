@@ -1,0 +1,29 @@
+﻿@*@model RegistrationMVCCore.Model.PatientDetailsViewModel*@
+
+
+
+<h1>Winning</h1>
+
+@*<div class="w3-card-4" style="width:850px;background-color:#FFFFFF; height:300px; margin-left:100px; margin-top:10px">
+    <header class="w3-container w3-blue">
+        <h4>Reassign Patient &nbsp;<i class="glyphicon glyphicon-tasks"></i></h4>
+    </header>
+    <div class="col-md-offset-0 col-md-12" style="float:left;background-color:#F7F7F7">
+        <h3 style="width:150px; float:left; color:#337AB7"> Reassign to </h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-5" style="float:left;">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.FirstOrDefault().vmUserAcc.UserID, ViewBag.OTList2 as SelectList, "--Select OT Name--", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group" style="float:left">
+                <div class="col-md-offset-2 col-md-2">
+                    <input type="submit" style="width:65px; float:left" class="btn btn-sm btn-primary btn-block btn-signin" value="Confirm" />
+                </div>
+            </div>
+        }
+    </div>
+</div>*@

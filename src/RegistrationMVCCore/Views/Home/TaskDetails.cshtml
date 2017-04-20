@@ -66,22 +66,12 @@
     <script>
         /**********Complete a Task**********/
         function completeTask(patientId, taskId) {
-            //alert("Patient ID " + patientId);
-            //alert("Task ID " + taskId);
             $.ajax({
                 type: "Post",
                 url: '@Url.Action("CompleteTask")',
                 data: { id: patientId, pid: taskId },
                 success: function (data) {
                     window.location = '/Home/Welcome';
-                    //window.location = '/Home/Welcome';
-                //success: function (data){
-                    //$('#AddNoteDetail').hide();
-                    //$('#Detail1').hide();
-                    //$('#ReassignPatientDetail').hide();
-                    //$('#TaskDetail').hide();
-                    //$('#AddNoteDetail').html(data);
-                    //$('#AddNoteDetail').fadeIn("slow");
                 },
                 error: function (data) {
                     $('#AddNoteDetail').fadeIn("slow");

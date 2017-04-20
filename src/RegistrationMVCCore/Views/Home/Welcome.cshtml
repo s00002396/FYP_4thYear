@@ -2,7 +2,7 @@
 
 <div class="container" style="background-color:#F4F4F5;width:980px">
     <div style="height:50px"></div> 
-    <section style="width:900px; margin-left:0px">
+    <section style="width:900px; margin-left:0px; height:700px">
         <section style="height:50px;width:590px;float:right;margin-left:30px ">
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test"><a data-toggle="tab" href="#home">Todays Tasks</a></li>
@@ -14,8 +14,7 @@
                         <div class="w3-card-4" style="background-color:#FFFFFF">
                             @if (Model.FirstOrDefault().vmTaskTable != null)
                             {
-                                @Html.Partial("_TodaysTasks", Model)
-                                <h1>Full</h1>
+                                @Html.Partial("_TodaysTasks", Model)                                
                             }
                             else
                             {
@@ -30,7 +29,6 @@
                             @if (Model.FirstOrDefault().vmTaskTable != null)
                             {
                                 @Html.Partial("_TomorrowsTasks", Model)
-                                <h1>Full</h1>
                             }
                             else
                             {
@@ -38,17 +36,11 @@
                             }
                         </div>
                     </div>
-                </div>  
-                @*<div id="home1" class="tab-pane fade in active">
-                    <div class="box" style="width:590px;">
-                        <div class="w3-card-4" style="background-color:#FFFFFF">
-                            @Html.Partial("_DeleteList", Model)
-                        </div>
-                    </div>
-                </div>*@             
+                </div>             
             </div>
         </section>
     <aside>
+        <h5 style="float:right; color:white; font-style:italic" class="glyphicon glyphicon-user">(@Model.FirstOrDefault().vmUserAcc.FirstName)</h5>
             @*****************Client Search*********************************************@
             <div class="w3-card-4" style="width:300px">
                 <div class="panel panel-default " style="border-radius:0px">
@@ -58,7 +50,7 @@
                         @using (@Html.BeginForm("Welcome", "Home", FormMethod.Get))
                         {
                             <b><i>&nbsp;&nbsp;&nbsp;Search By</i>&nbsp;&nbsp;</b><br />@Html.RadioButton("searchBy", "Social_Security_No",true)<text>&nbsp;Social Security No&nbsp;&nbsp;</text>@Html.RadioButton("searchBy", "Name")<text>&nbsp;Name</text><br />
-                            @Html.TextBox("search", "", new { placeholder = "Search by PPS No.", style = "border-radius:5px; float:left; width:170px; margin-right:3px", @class = "form-control" })<input class="w3-btn w3-light-blue w3-border"  type="submit" style="border-radius:5px;color:#FFFFFF !important" value="search" />
+                            @Html.TextBox("search", "", new { placeholder = "Search", style = "border-radius:5px; float:left; width:170px; margin-right:3px", @class = "form-control" })<input class="w3-btn w3-light-blue w3-border"  type="submit" style="border-radius:5px;color:#FFFFFF !important" value="search" />
                         }
                     </div>
                 </div>
